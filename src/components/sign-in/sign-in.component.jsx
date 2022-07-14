@@ -1,6 +1,8 @@
 import React from "react";
 import { TextField,Button,Box } from '@mui/material';
 import { signInWithGoogle } from "../../firebase/firebase.utils";
+import GoogleIcon from '@mui/icons-material/Google';
+import Google from "@mui/icons-material/Google";
 
 function SignIn(){
     const handleSubmit=async event =>{
@@ -21,7 +23,7 @@ function SignIn(){
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, },
+                '& .MuiTextField-root': { m: 1 },
                 
             }}
             validate
@@ -59,6 +61,7 @@ function SignIn(){
         </div>
         <Button 
         id="fullWidth"
+        startIcon={<GoogleIcon />}
         variant="contained"
         fullWidth
         onClick={signInWithGoogle}
@@ -68,7 +71,7 @@ function SignIn(){
             height: 56,
             }
           }
-        >Google</Button>
+        >Sign In</Button>
 
         </Box>
         </>
