@@ -1,8 +1,8 @@
 import './App.css';
 import {Routes,Route,Link} from "react-router-dom";
-import SignInSignUp from './pages/sign-in/sign-in-sign-up.component';
-import SignIn from './components/sign-in/sign-in.component';
-import SignUp from './components/sign-up/sign-up.component';
+import Dashboard from './pages/dashboard/dashboard.component';
+import SignInPage from './pages/sign-in/sign-in.component';
+import SignUpPage from './pages/sign-up/sign-up.component';
 
 
 function App() {
@@ -12,10 +12,10 @@ function App() {
       <h1>Welcome to Ultimate Project!</h1>
       <p>Create and manage projects, tasks and teams easily.</p>
       </header> 
-      <SignInSignUp />
         <Routes>
-          <Route exact path='/sign-in' element={<SignIn />} />
-          <Route exact path='/sign-up' element={<SignUp />} />
+          <Route exact path='/sign-in' element={<SignInPage />} />
+          <Route exact path='/sign-up' element={<SignUpPage />} />
+          <Route exact path='/dashboard' element={<Dashboard />} />
         </Routes>
     </div>
   );

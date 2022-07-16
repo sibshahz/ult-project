@@ -1,22 +1,34 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import {Link, useNavigate} from 'react-router-dom';
+import { useAuthState } from "react-firebase-hooks/auth";
 import { TextField,Button,Box } from '@mui/material';
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth,signInWithGoogle,logInWithEmailAndPassword } from "../../firebase/firebase";
 import GoogleIcon from '@mui/icons-material/Google';
-import Google from "@mui/icons-material/Google";
+
 
 function SignIn(){
-    const handleSubmit=async event =>{
-        console.log(event);
-        event.preventDefault();
+  const [userCredentials,setCredentials]=useState({email:'',password:''});
+  const {email, password}=userCredentials;
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (loading) {
+  //     // maybe trigger a loading screen
+  //     return;
+  //   }
+  //   if (user) navigate("/dashboard");
+  // }, [user, loading]);
+  const handleSubmit=async event =>{
+      event.preventDefault();
 
-        // emailSignInStart(email,password);
+      logInWithEmailAndPassword(email,password);
 
-    };
-
-    const handleChange=event =>{
+  };
+  const handleChange=event =>{
       const {value, name}=event.target;
-    //   setCredentials({...userCredentials,[name]: value});
-    };
+      setCredentials({...userCredentials,[name]: value});
+  };
+
     return(
       <>
       <h2>Sign In</h2>
@@ -34,21 +46,26 @@ function SignIn(){
          <TextField
           required
           fullWidth
+          onChange={handleChange}
           id="outlined-required fullWidth"
           label="Email"
           type="email"
+          name="email"
           defaultValue="your@mail.com"
           autoComplete="current-email"
         />
         <TextField
           id="outlined-password-input fullWidth"
+          onChange={handleChange}
           label="Password"
           type="password"
+          name="password"
           fullWidth
           autoComplete="current-password"
         />
         <Button 
         id="fullWidth"
+        onClick={handleSubmit}
         variant="contained"
         fullWidth
         sx={{
@@ -61,10 +78,10 @@ function SignIn(){
         </div>
         <Button 
         id="fullWidth"
+        onClick={signInWithGoogle}
         startIcon={<GoogleIcon />}
         variant="contained"
         fullWidth
-        onClick={signInWithGoogle}
         sx={{
             width: '175px',
             m:1,
@@ -72,7 +89,7 @@ function SignIn(){
             }
           }
         >Sign In</Button>
-
+          <p>Dont have an account yet? <Link to={'/sign-up'}>Sign up</Link> </p>
         </Box>
         </>
     );

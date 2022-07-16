@@ -1,10 +1,10 @@
 import React from "react";
-import './sign-in-sign-up.styles.css';
+import './sign-up.styles.css';
 import {Link} from 'react-router-dom';
-import SignIn from "../../components/sign-in/sign-in.component";
 import SignUp from "../../components/sign-up/sign-up.component";
 import {Grid} from '@mui/material';
-function SignInSignUp(){
+import { logout } from "../../firebase/firebase";
+function SignUpPage(){
     return(
         <>
 <Grid container spacing={2}>
@@ -12,7 +12,7 @@ function SignInSignUp(){
     <SignUp />
   </Grid>
   <Grid item xs={12} md={5} pr={2}>
-    <SignIn />
+    
   </Grid>
 </Grid>
 
@@ -21,4 +21,4 @@ function SignInSignUp(){
     );
 }
 
-export default SignInSignUp;
+export default SignUpPage;
