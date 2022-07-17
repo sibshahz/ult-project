@@ -6,7 +6,7 @@ import { auth,signInWithGoogle,logInWithEmailAndPassword } from "../../firebase/
 import GoogleIcon from '@mui/icons-material/Google';
 
 
-function SignIn(){
+const SignIn=({currentUser})=>{
   const [userCredentials,setCredentials]=useState({email:'',password:''});
   const {email, password}=userCredentials;
   const [user, loading, error] = useAuthState(auth);
@@ -47,7 +47,7 @@ function SignIn(){
           required
           fullWidth
           onChange={handleChange}
-          id="outlined-required fullWidth"
+          id="outlined-required-two fullWidthOne"
           label="Email"
           type="email"
           name="email"
@@ -55,7 +55,7 @@ function SignIn(){
           autoComplete="current-email"
         />
         <TextField
-          id="outlined-password-input fullWidth"
+          id="outlined-password-input fullWidthTwo"
           onChange={handleChange}
           label="Password"
           type="password"
@@ -77,7 +77,7 @@ function SignIn(){
         >Sign In</Button>
         </div>
         <Button 
-        id="fullWidth"
+        id="fullWidthThree"
         onClick={signInWithGoogle}
         startIcon={<GoogleIcon />}
         variant="contained"

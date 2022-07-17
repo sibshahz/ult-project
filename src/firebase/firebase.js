@@ -3,6 +3,7 @@ import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -28,7 +29,7 @@ const firebaseConfig = {
   };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const auth = getAuth();
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
@@ -88,6 +89,8 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+
+
 export {
   auth,
   db,
