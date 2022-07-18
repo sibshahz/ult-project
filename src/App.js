@@ -47,7 +47,7 @@ class App extends React.Component{
         <p>Create and manage projects, tasks and teams easily.</p>
         </header> 
           <Routes>
-            <Route exact path='/sign-in' element={<SignInPage />} />
+            <Route path='/' element={<SignInPage />} />
             <Route exact path='/sign-up' element={<SignUpPage />} />
             <Route exact path='/dashboard' element={<Dashboard />} />
           </Routes>
