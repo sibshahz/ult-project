@@ -89,7 +89,7 @@ function SignUp(){
                     }
                 }
                 >Sign up</Button>
-                <p>Already have an account? <Link to={'/sign-in'}>Sign in</Link> </p>
+                <p>Already have an account? <Link to={'/'}>Sign in</Link> </p>
             </Box>
         </>
     );
