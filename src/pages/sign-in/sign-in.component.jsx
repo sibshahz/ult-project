@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import SignIn from "../../components/sign-in/sign-in.component";
 import {Grid} from '@mui/material';
 import { logout } from "../../firebase/firebase";
-const SignInPage= ({ currentUser }) => {
+const SignInPage= () => {
 
     return(
         <>
@@ -14,7 +14,7 @@ const SignInPage= ({ currentUser }) => {
             </Grid>
             <Grid item xs={12} md={5} pr={2}>
                 
-                <SignIn currentUser={currentUser} />
+                <SignIn />
             </Grid>
             </Grid>    
         </>

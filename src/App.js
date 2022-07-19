@@ -43,8 +43,6 @@ class App extends React.Component{
       <div className="App">
         <header className="App-header">
           <Header />
-        <h1>Welcome to Ultimate Project!</h1>
-        <p>Create and manage projects, tasks and teams easily.</p>
         </header> 
           <Routes>
             <Route exact path='/sign-in' element={<SignInPage />} />
