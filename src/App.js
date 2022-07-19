@@ -41,7 +41,7 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
-        <header className="App-header">
+        <header className="App-header top-bar">
           <Header />
         </header> 
           <Routes>
