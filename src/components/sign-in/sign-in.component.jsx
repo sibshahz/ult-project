@@ -4,20 +4,19 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { TextField,Button,Box } from '@mui/material';
 import { auth,signInWithGoogle,logInWithEmailAndPassword } from "../../firebase/firebase";
 import GoogleIcon from '@mui/icons-material/Google';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 
 const SignIn=({currentUser})=>{
   const [userCredentials,setCredentials]=useState({email:'',password:''});
   const {email, password}=userCredentials;
-  const [user, loading, error] = useAuthState(auth);
+  // const [currentUser, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (loading) {
-  //     // maybe trigger a loading screen
-  //     return;
-  //   }
-  //   if (user) navigate("/dashboard");
-  // }, [user, loading]);
+  useEffect(() => {
+    if (currentUser) navigate("/dashboard");
+  });
   const handleSubmit=async event =>{
       event.preventDefault();
 
@@ -94,4 +93,13 @@ const SignIn=({currentUser})=>{
         </>
     );
 }
-export default SignIn;
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+});
+
+
+
+export default connect(
+  mapStateToProps
+)(SignIn);

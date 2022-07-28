@@ -3,11 +3,12 @@ import {Link, useNavigate} from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {Box,TextField,Button} from '@mui/material';
 import {auth,registerWithEmailAndPassword} from '../../firebase/firebase';
+
 function SignUp(){
     const [userCredentials,setCredentials]=useState({signUpName:'',signUpEmail:'',signUpPassword:'',confirmPassword:''});
     const {signUpName,signUpEmail, signUpPassword,confirmPassword}=userCredentials;
-    const [user, loading, error] = useAuthState(auth);
-    const navigate = useNavigate();
+    // const [user, loading, error] = useAuthState(auth);
+    // const navigate = useNavigate();
     // useEffect(() => {
     //     if (loading) return;
     //     if (user) navigate("/dashboard");
@@ -89,7 +90,7 @@ function SignUp(){
                     }
                 }
                 >Sign up</Button>
-                <p>Already have an account? <Link to={'/'}>Sign in</Link> </p>
+                <p>Already have an account? <Link to={'/sign-in'}>Sign in</Link> </p>
             </Box>
         </>
     );
