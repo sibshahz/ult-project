@@ -4,12 +4,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import {auth} from '../../firebase/firebase';
 
 
-const RequireAuth = ({ children }) => {
+const RequireAuth = ({ children,navigateTo }) => {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     useEffect(() => {
         if (loading) return;
-        if (!user) navigate("/sign-in");
+        if (!user) navigate(navigateTo);
       }, [user, loading]);
 
     return children;

@@ -1,12 +1,13 @@
 import React from "react";
-import { auth } from "../../firebase/firebase";
-import LogoutIcon from '@mui/icons-material/Logout';
+import FullScreenDialog from "../../components/project-dialog-box/full-screen-dialog.component";
 class DashboardPage extends React.Component {
   
   render(){
     return (
       <>
         <h1>Dashboard</h1>
+        <FullScreenDialog />
+        
       </>
      );
   }

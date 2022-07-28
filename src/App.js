@@ -46,6 +46,7 @@ class App extends React.Component{
         <header className="App-header top-bar">
           <Header />
         </header> 
+        <div className='main-content'>
           <Routes>
             {/* <Route path='/' element={<SignInPage />} /> */}
             <Route path='/sign-in' element={<SignInPage />} />
@@ -53,12 +54,13 @@ class App extends React.Component{
             <Route
                 path="/dashboard"
                 element={
-                <RequireAuth>
+                <RequireAuth navigateTo="/sign-in">
                   <DashboardPage />
                 </RequireAuth>
                 }
             />
           </Routes>
+        </div> 
       </div>
       );
     }
