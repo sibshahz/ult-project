@@ -49,6 +49,7 @@ const SignIn=({currentUser})=>{
           id="outlined-required-two fullWidthOne"
           label="Email"
           type="email"
+          value={email}
           name="email"
           defaultValue="your@mail.com"
           autoComplete="current-email"
@@ -57,6 +58,7 @@ const SignIn=({currentUser})=>{
           id="outlined-password-input fullWidthTwo"
           onChange={handleChange}
           label="Password"
+          value={password}
           type="password"
           name="password"
           fullWidth
