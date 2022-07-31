@@ -1,5 +1,6 @@
 import React from "react";
-import FullScreenDialog from "../../components/project-dialog-box/full-screen-dialog.component";
+import LikeDislike from "../../components/codility-problems/like-dislike";
+import LoginForm from "../../components/codility-problems/login-form";
 import { ProjectsDirectory } from "../../components/projects-directory/projects-directory.component";
 class DashboardPage extends React.Component {
   

@@ -18,6 +18,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { addProject } from '../../redux/projects/projects.utils';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -37,6 +38,7 @@ export default function FullScreenDialog() {
   };
 
   const handleClose = () => {
+    addProject();
     setOpen(false);
   };
 
