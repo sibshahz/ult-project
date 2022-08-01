@@ -5,6 +5,7 @@ export const setProjectData = project => ({
   payload: project
 });
 
-export const getProjectsData = () => ({
-  type: ProjectsActionTypes.GET_PROJECTS_DATA
+export const getProjectsData = projects => ({
+  type: ProjectsActionTypes.GET_PROJECTS_DATA,
+  payload:projects
 });

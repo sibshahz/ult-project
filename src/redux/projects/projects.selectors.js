@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
-const selectProjects = state => state.projects;
+const selectProjects = state => state.project;
 
 export const selectCurrentProjects = createSelector(
   [selectProjects],
-  projects => projects.currentProjects
+  project => project.currentProjects
 );

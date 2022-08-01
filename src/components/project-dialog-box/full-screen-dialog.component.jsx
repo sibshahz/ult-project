@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import ListItem from '@mui/material/ListItem';
@@ -18,27 +18,41 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { addProject } from '../../redux/projects/projects.utils';
-
+import { connect } from 'react-redux';
+import { setProjectData,getProjectsData } from '../../redux/projects/projects.actions';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentProjects } from '../../redux/projects/projects.selectors';
+import { getProjectsList } from '../../redux/projects/projects.utils';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
+function FullScreenDialog({setProjectData,getProjectsData,currentProjects}) {
   const [open, setOpen] = React.useState(false);
   const [projectDetails,setProjectDetails]=useState({projectTitle:'',startDate:'',endDate:'',overview:'',priority:'',status:'',team:''});
   const {projectTitle,startDate,endDate,overview,priority,status,team}=projectDetails;
 
+  useEffect(() => {
+    // code to run on component mount
+    calculateData();
+  }, [])
+  const calculateData=async ()=>{
+    const result =await getProjectsList();
+    getProjectsData(result);
+  }
   const handleChange=event =>{
   const {value, name}=event.target;
     setProjectDetails({...projectDetails,[name]: value});
   };
-  const handleClickOpen = () => {
+  const handleClickOpen = async () => {
+    
     setOpen(true);
+
   };
 
-  const handleClose = () => {
-    addProject();
+  const handleClose = async () => {
+    await setProjectData(projectDetails);
+    console.log("SAVE WAS CALLED");
     setOpen(false);
   };
 
@@ -133,9 +147,9 @@ export default function FullScreenDialog() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Red</MenuItem>
+              <MenuItem value={30}>Red</MenuItem>
               <MenuItem value={20}>Blue</MenuItem>
-              <MenuItem value={30}>Yellow</MenuItem>
+              <MenuItem value={10}>Yellow</MenuItem>
             </Select>
           </FormControl>
 
@@ -169,9 +183,9 @@ export default function FullScreenDialog() {
               onChange={handleChange}
             >
               <MenuItem value={10}>React team</MenuItem>
-              <MenuItem value={10}>Design Team</MenuItem>
-              <MenuItem value={20}>Developer Team</MenuItem>
-              <MenuItem value={30}>QA Team</MenuItem>
+              <MenuItem value={20}>Design Team</MenuItem>
+              <MenuItem value={30}>Developer Team</MenuItem>
+              <MenuItem value={40}>QA Team</MenuItem>
             </Select>
           </FormControl>
           </ListItem>
@@ -180,3 +194,17 @@ export default function FullScreenDialog() {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  currentProjects: selectCurrentProjects
+});
+
+const mapDispatchToProps = dispatch => ({
+  setProjectData: projectDetails => dispatch(setProjectData(projectDetails)),
+  getProjectsData: projects => dispatch(getProjectsData(projects))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FullScreenDialog);
