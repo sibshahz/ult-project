@@ -19,7 +19,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { connect } from 'react-redux';
-import { setProjectData,getProjectsData } from '../../redux/projects/projects.actions';
+import { setProjectData,setProjectsData } from '../../redux/projects/projects.actions';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentProjects } from '../../redux/projects/projects.selectors';
 import { getProjectsList } from '../../redux/projects/projects.utils';
@@ -27,19 +27,19 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function FullScreenDialog({setProjectData,getProjectsData,currentProjects}) {
+function FullScreenDialog({setProjectData,setProjectsData,currentProjects}) {
   const [open, setOpen] = React.useState(false);
   const [projectDetails,setProjectDetails]=useState({projectTitle:'',startDate:'',endDate:'',overview:'',priority:'',status:'',team:''});
   const {projectTitle,startDate,endDate,overview,priority,status,team}=projectDetails;
 
-  useEffect(() => {
-    // code to run on component mount
-    calculateData();
-  }, [])
-  const calculateData=async ()=>{
-    const result =await getProjectsList();
-    getProjectsData(result);
-  }
+  // useEffect(() => {
+  //   // code to run on component mount
+  //   calculateData();
+  // }, [])
+  // const calculateData=async ()=>{
+  //   const result =await getProjectsList();
+  //   setProjectsData(result);
+  // }
   const handleChange=event =>{
   const {value, name}=event.target;
     setProjectDetails({...projectDetails,[name]: value});
@@ -201,7 +201,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   setProjectData: projectDetails => dispatch(setProjectData(projectDetails)),
-  getProjectsData: projects => dispatch(getProjectsData(projects))
+  setProjectsData: projects => dispatch(setProjectsData(projects))
 });
 
 export default connect(

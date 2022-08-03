@@ -14,7 +14,7 @@ const projectsReducer = (state = INITIAL_STATE, action) => {
       // };
       addProject(action.payload);
       return state;
-    case ProjectsActionTypes.GET_PROJECTS_DATA:
+    case ProjectsActionTypes.SET_PROJECTS_DATA:
       return{
         ...state,
         currentProjects:action.payload

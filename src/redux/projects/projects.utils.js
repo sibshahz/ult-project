@@ -3,8 +3,11 @@ import { db } from "../../firebase/firebase";
 import {
     getFirestore,
     query,
+    onSnapshot,
     getDocs,
     collection,
+    deleteDoc,
+    doc,
     where,
     addDoc,
     orderBy,
@@ -27,22 +30,30 @@ export const addProject=async (projectDetails)=>{
 
     console.log('INPUT DATA WAS is: ',projectDetails);
 }
-
+export const deleteProject=async (id)=>{
+  await deleteDoc(doc(db, "projects",id));
+}
 export const getProjectsList=async ()=>{
-  // const q = query(collection(db, "projects"), orderBy("priority", "desc"));
-  // const docs = await getDocs(q);
-  // console.log("RESULT PROJECTS ARE: ",docs.docs);
+  
+  
   let projects=[];
   const querySnapshot = await getDocs(collection(db, "projects"));
   querySnapshot.forEach((doc) => {
-  // console.log(`${doc.id} => ${doc.data()}`);
-  // 
-      // console.log("DATA IS: ",doc.data());
-  projects.push(doc.data());
+
+  projects.push({...doc.data(),id: doc.id});
   
   });
-  // console.log("PROJECTS ARE: ARRAY: ",projects);
-  // console.log("🚀 ~ file: projects.utils.js ~ line 47 ~ getProjectsList ~ projects", projects)
-
   return projects;
+
+
+  // const q =await query(collection(db, "projects"));
+  // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //   const projects = [];
+  //   querySnapshot.forEach((doc) => {
+  //       projects.push({...doc.data(),id:doc.id});
+  //       console.log("Data is is: ",{...doc.data(),id: doc.id});
+  //   });
+  //   return projects;
+  // });
+
 }
