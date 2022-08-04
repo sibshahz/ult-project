@@ -30,15 +30,15 @@ export class ProjectsDirectory extends React.Component {
   // }
   unsubscribeFromProjects = null;
   
-  async componentDidMount(){
+  componentDidMount(){
     try{
 
       const projectsRef = collection(db, "projects");
     
-      const q = await query(projectsRef,where("projectAuthor","==",this.props.currentUser.id));
+      const q = query(projectsRef,where("projectAuthor","==",this.props.currentUser.id));
       // const q = query(projectsRef);
     
-        this.unsubscribeFromProjects =await onSnapshot(q, (querySnapshot) => {
+        this.unsubscribeFromProjects =onSnapshot(q, (querySnapshot) => {
           const projects = [];
           querySnapshot.forEach((doc) => {
               projects.push({...doc.data(),id:doc.id});
