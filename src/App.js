@@ -9,7 +9,7 @@ import SignUpPage from './pages/sign-up/sign-up.component';
 import Header from './components/header/header.component';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
-
+import { setCurrentUserId } from './redux/user/user.actions';
 import {auth}  from './firebase/firebase';
 import RequireAuth from './components/require-auth/require-auth.component';
 
@@ -19,7 +19,7 @@ class App extends React.Component{
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser,setCurrentUserId } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth!==null) {
           let user={
@@ -30,6 +30,7 @@ class App extends React.Component{
             setCurrentUser(
               user
             );
+            setCurrentUserId(user.id);
         
       }else{
         setCurrentUser(null);
@@ -72,7 +73,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  setCurrentUserId: userId => dispatch(setCurrentUserId(userId)),
 });
 
 export default connect(

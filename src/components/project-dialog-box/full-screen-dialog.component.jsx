@@ -8,6 +8,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import AddIcon from '@mui/icons-material/Add';
@@ -27,7 +28,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function FullScreenDialog({setProjectData,setProjectsData,currentProjects}) {
+function FullScreenDialog({setProjectData,setProjectsData,currentProjects,currentUser}) {
   const [open, setOpen] = React.useState(false);
   const [projectDetails,setProjectDetails]=useState({projectTitle:'',startDate:'',endDate:'',overview:'',priority:'',status:'',team:''});
   const {projectTitle,startDate,endDate,overview,priority,status,team}=projectDetails;
@@ -51,7 +52,8 @@ function FullScreenDialog({setProjectData,setProjectsData,currentProjects}) {
   };
 
   const handleClose = async () => {
-    await setProjectData(projectDetails);
+    console.log("CURRENT USERT TO SAVE IS: ",currentUser.id);
+    await setProjectData({...projectDetails,projectAuthor:currentUser.id});
     console.log("SAVE WAS CALLED");
     setOpen(false);
   };
@@ -196,7 +198,8 @@ function FullScreenDialog({setProjectData,setProjectsData,currentProjects}) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentProjects: selectCurrentProjects
+  currentProjects: selectCurrentProjects,
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({

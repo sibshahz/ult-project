@@ -86,6 +86,9 @@ const sendPasswordReset = async (email) => {
     alert(err.message);
   }
 };
+// const getCurrentUserId=()=>{
+//   return auth.user.id
+// };
 const logout = () => {
   signOut(auth);
 };
@@ -94,6 +97,7 @@ const logout = () => {
 export {
   auth,
   db,
+
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,

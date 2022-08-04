@@ -5,44 +5,55 @@ import { setProjectsData } from '../../redux/projects/projects.actions';
 import { getProjectsList } from '../../redux/projects/projects.utils';
 import { selectCurrentProjects } from '../../redux/projects/projects.selectors';
 import FullScreenDialog from '../project-dialog-box/full-screen-dialog.component';
+import { selectCurrentUserId } from '../../redux/user/user.selectors';
 import Projectitem from '../project-item/project-item.component';
 import Card from '@mui/material/Card';
 import './projects-directory.styles.css';
 
 import { db } from "../../firebase/firebase";
 import {
-
+    where,
     query,
     onSnapshot,
     collection,
+    getDocs
   } from "firebase/firestore";
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+
 
 
 export class ProjectsDirectory extends React.Component {
-  // constructor(){
-  //   super();
+  // constructor(props) {
+  //   super(props);
+
+  
   // }
   unsubscribeFromProjects = null;
-  componentDidMount(){
-    // this.calculateData();
-  const q =query(collection(db, "projects"));
-    this.unsubscribeFromProjects = onSnapshot(q, (querySnapshot) => {
-      const projects = [];
-      querySnapshot.forEach((doc) => {
-          projects.push({...doc.data(),id:doc.id});
-      });
-      this.props.setProjectsData(projects);
-    });
-  }
-  componentWillUnmount(){
-    this.unsubscribeFromProjects();
-  }
-  async calculateData(){
-    const projects=await getProjectsList();
+  
+  async componentDidMount(){
+    try{
 
-    this.props.setProjectsData(projects);
+      const projectsRef = collection(db, "projects");
+    
+      const q = await query(projectsRef,where("projectAuthor","==",this.props.currentUser.id));
+      // const q = query(projectsRef);
+    
+        this.unsubscribeFromProjects =await onSnapshot(q, (querySnapshot) => {
+          const projects = [];
+          querySnapshot.forEach((doc) => {
+              projects.push({...doc.data(),id:doc.id});
+          });
+          this.props.setProjectsData(projects);
+        });
+     }catch(e){
+      console.error("Error is: ", e.message);
+     }
 
+
+ 
   }
+
+
   handleClick(id,projectTitle){
     console.log("HANDLE CLIKC",id+" "+projectTitle);
   }
@@ -68,7 +79,9 @@ export class ProjectsDirectory extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentProjects: selectCurrentProjects
+  currentUser: selectCurrentUser,
+  currentProjects: selectCurrentProjects,
+  currentUserId:selectCurrentUserId
 });
 
 const mapDispatchToProps = dispatch => ({
