@@ -6,7 +6,7 @@ import {Routes,Route,Link, Navigate} from "react-router-dom";
 import DashboardPage from './pages/dashboard/dashboard.component';
 import SignInPage from './pages/sign-in/sign-in.component';
 import SignUpPage from './pages/sign-up/sign-up.component';
-import Header from './components/header/header.component';
+import HeaderComponent from './components/header/header.component';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { setCurrentUserId } from './redux/user/user.actions';
@@ -14,12 +14,15 @@ import {auth}  from './firebase/firebase';
 import RequireAuth from './components/require-auth/require-auth.component';
 
 
+import { AppShell, Navbar, Header } from '@mantine/core';
+
+
 
 class App extends React.Component{
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser,setCurrentUserId } = this.props;
+    const { setCurrentUser} = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth!==null) {
           let user={
@@ -30,7 +33,6 @@ class App extends React.Component{
             setCurrentUser(
               user
             );
-            setCurrentUserId(user.id);
         
       }else{
         setCurrentUser(null);
@@ -44,24 +46,31 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
-        <header className="App-header top-bar">
-          <Header />
-        </header> 
-        <div className='main-content'>
-          <Routes>
-            {/* <Route path='/' element={<SignInPage />} /> */}
-            <Route path='/sign-in' element={<SignInPage />} />
-            <Route path='/sign-up' element={<SignUpPage />} />
-            <Route
-                path="/dashboard"
-                element={
-                <RequireAuth navigateTo="/sign-in">
-                  <DashboardPage />
-                </RequireAuth>
-                }
-            />
-          </Routes>
-        </div> 
+        <AppShell
+          padding="md"
+          navbar={<Navbar width={{ base: 300 }} height={500} p="xs" open={false}>{/* Navbar content */}</Navbar>}
+          header={<Header height={60} p="xs" ><HeaderComponent /></Header>}
+          styles={(theme) => ({
+            main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
+          })}
+        >
+          <div className='main-content'>
+              <Routes>
+                {/* <Route path='/' element={<SignInPage />} /> */}
+                <Route path='/sign-in' element={<SignInPage />} />
+                <Route path='/sign-up' element={<SignUpPage />} />
+                <Route
+                    path="/dashboard"
+                    element={
+                    <RequireAuth navigateTo="/sign-in">
+                      <DashboardPage />
+                    </RequireAuth>
+                    }
+                />
+              </Routes>
+            </div>
+        </AppShell> 
+         
       </div>
       );
     }
@@ -74,7 +83,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user)),
-  setCurrentUserId: userId => dispatch(setCurrentUserId(userId)),
 });
 
 export default connect(

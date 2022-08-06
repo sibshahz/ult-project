@@ -53,7 +53,7 @@ function FullScreenDialog({setProjectData,setProjectsData,currentProjects,curren
 
   const handleClose = async () => {
     console.log("CURRENT USERT TO SAVE IS: ",currentUser.id);
-    await setProjectData({...projectDetails,projectAuthor:currentUser.id});
+    await setProjectData({...projectDetails,userId:currentUser.id});
     console.log("SAVE WAS CALLED");
     setOpen(false);
   };

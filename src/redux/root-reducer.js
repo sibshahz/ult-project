@@ -6,9 +6,8 @@ import projectsReducer from './projects/projects.reducer';
 import userReducer from './user/user.reducer';
 
 const persistConfig = {
-  key: 'projectroot',
+  key: 'newroot',
   storage,
-//   whitelist: ['cart']
 };
 
 const rootReducer = combineReducers({

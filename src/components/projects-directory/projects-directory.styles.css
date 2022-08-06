@@ -3,3 +3,8 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+.loading-div{
+    position: absolute;
+    top: 48%;
+    left: 48%;
+}

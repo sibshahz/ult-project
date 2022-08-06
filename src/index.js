@@ -6,37 +6,24 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
-import { createTheme,ThemeProvider } from '@mui/material/styles';
-import { green, purple } from '@mui/material/colors';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
-});
+import { MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
+import { NotificationsProvider } from '@mantine/notifications';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store} >
-    <ThemeProvider theme={theme}>
-      
-      
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store} >   
+      <BrowserRouter>
+          <MantineProvider>
+          <ModalsProvider>
+            <NotificationsProvider>
+              <App />
+            </NotificationsProvider>
+          </ModalsProvider>
+        </MantineProvider>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

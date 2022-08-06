@@ -7,14 +7,16 @@ import {
     getDocs,
     collection,
     deleteDoc,
+
     doc,
     where,
     addDoc,
     orderBy,
   } from "firebase/firestore";
 export const addProject=async (projectDetails)=>{
-  const {projectTitle,startDate,endDate,overview,priority,status,team,projectAuthor}=projectDetails;
-  console.log(projectDetails);
+  const {userId,projectTitle,startDate,endDate,overview,priority,status,team}=projectDetails;
+  // const docRef = doc(db, "users", userId);
+
     const res=await addDoc(collection(db, "projects"), {
         projectTitle,
         startDate,
@@ -23,7 +25,7 @@ export const addProject=async (projectDetails)=>{
         priority,
         status,
         team,
-        projectAuthor
+        projectAuthor:userId
       });
 
       

@@ -15,48 +15,21 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountMenu from "../account-menu/account-menu.component";
 
-class Header extends React.Component{
+class HeaderComponent extends React.Component{
     
 
     render(){
 
         return(
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="fixed">
-                    <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                   
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Ult-Project
-                    </Typography>
-                    {/* <Button color="inherit">Login</Button> */}
-                    {
+            <div className="header-menu">
+                 {
                         this.props.currentUser ?
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            color="inherit"
-                            aria-label="account"
-                            sx={{ mr: 2 }}
-                            onClick={() => auth.signOut()}
-                        >
-                            <AccountCircleIcon />
-                        </IconButton>
+                        <AccountMenu />
                         : null
-                    }
-                    </Toolbar>
-                    
-                </AppBar>
-                </Box>
+                }
+                </div>
             // this.props.currentUser ?
             // <div>
             //     <h4>{this.props.currentUser.name}</h4>
@@ -75,4 +48,4 @@ const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser
   });
   
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(HeaderComponent);

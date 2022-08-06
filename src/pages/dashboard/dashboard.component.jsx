@@ -1,5 +1,6 @@
 import React from "react";
 import ProjectForm from "../../components/project-form/project-form.component";
+import HooksProjectsDirectoryComponent from "../../components/projects-directory/hooks-projects-directory.component";
 import ProjectsDirectory from "../../components/projects-directory/projects-directory.component";
 class DashboardPage extends React.Component {
   
@@ -7,7 +8,8 @@ class DashboardPage extends React.Component {
     return (
       <>
         <h1>Dashboard</h1>
-       <ProjectsDirectory />
+        {/* <ProjectsDirectory /> */}
+       <HooksProjectsDirectoryComponent />
         
       </>
      );
