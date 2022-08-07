@@ -97,7 +97,7 @@ return(
 
       <Text size="sm" color="dimmed">
       <Spoiler maxHeight={20} showLabel="Show more" hideLabel="Hide">
-        {overview}
+      <div dangerouslySetInnerHTML={{__html: overview}} />
       </Spoiler>
       </Text>
 

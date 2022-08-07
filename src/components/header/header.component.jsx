@@ -26,7 +26,7 @@ class HeaderComponent extends React.Component{
             <div className="header-menu">
                  {
                         this.props.currentUser ?
-                        <AccountMenu />
+                        <AccountMenu user={this.props.currentUser} />
                         : null
                 }
                 </div>

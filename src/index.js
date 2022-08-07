@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
+import GlobalStyles from './components/global-styles/global-styles.component';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,8 +18,10 @@ root.render(
     <Provider store={store} >   
       <BrowserRouter>
           <MantineProvider>
+          <GlobalStyles />
           <ModalsProvider>
             <NotificationsProvider>
+            
               <App />
             </NotificationsProvider>
           </ModalsProvider>

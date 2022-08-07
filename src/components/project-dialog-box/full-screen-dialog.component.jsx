@@ -24,6 +24,11 @@ import { setProjectData,setProjectsData } from '../../redux/projects/projects.ac
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentProjects } from '../../redux/projects/projects.selectors';
 import { getProjectsList } from '../../redux/projects/projects.utils';
+
+import { Drawer, useMantineTheme } from '@mantine/core';
+
+import AddProject from '../add-project/add-project.component';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -32,15 +37,9 @@ function FullScreenDialog({setProjectData,setProjectsData,currentProjects,curren
   const [open, setOpen] = React.useState(false);
   const [projectDetails,setProjectDetails]=useState({projectTitle:'',startDate:'',endDate:'',overview:'',priority:'',status:'',team:''});
   const {projectTitle,startDate,endDate,overview,priority,status,team}=projectDetails;
+  const [opened, setOpened] = useState(false);
+  const theme = useMantineTheme();
 
-  // useEffect(() => {
-  //   // code to run on component mount
-  //   calculateData();
-  // }, [])
-  // const calculateData=async ()=>{
-  //   const result =await getProjectsList();
-  //   setProjectsData(result);
-  // }
   const handleChange=event =>{
   const {value, name}=event.target;
     setProjectDetails({...projectDetails,[name]: value});
@@ -58,8 +57,35 @@ function FullScreenDialog({setProjectData,setProjectsData,currentProjects,curren
     setOpen(false);
   };
 
+ 
+
   return (
-    <div>
+    <>
+     <Drawer
+     id='project-add-drawer'
+     sx={{ 
+      overflow:'auto'
+      }}
+     className='project-add-drawer'
+      opened={opened}
+      onClose={() => setOpened(false)}
+      overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
+      position="bottom"
+       size="100%"
+       lockScroll={true}
+      overlayOpacity={0.55}
+      overlayBlur={3}
+
+      
+    >
+      
+      <AddProject setOpened={setOpened} />
+      
+    </Drawer>
+    
+      <Button onClick={() => setOpened(true)}>Open Drawer</Button>
+      
+    {/* <div>
     
       <IconButton
             sx={{ 
@@ -193,7 +219,8 @@ function FullScreenDialog({setProjectData,setProjectsData,currentProjects,curren
           </ListItem>
         </List>
       </Dialog>
-    </div>
+    </div> */}
+    </>
   );
 }
 

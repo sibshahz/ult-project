@@ -43,3 +43,6 @@
 .main-content{
   /* padding-top: 50px; */
 }
+.App{
+  overflow-y: scroll;
+}
