@@ -7,9 +7,9 @@ import { selectCurrentProjects } from '../../redux/projects/projects.selectors';
 import FullScreenDialog from '../project-dialog-box/full-screen-dialog.component';
 import { selectCurrentUserId } from '../../redux/user/user.selectors';
 import Projectitem from '../project-item/project-item.component';
-import Card from '@mui/material/Card';
-import { CircularProgress,Box } from '@mui/material';
+import { Box } from '@mantine/core';
 import './projects-directory.styles.css';
+import { Loader } from '@mantine/core';
 
 
 
@@ -74,7 +74,7 @@ const ProjectsDirectoryHooks=({currentProjects,setProjectsData})=> {
       <div className='projects-items-list'>
       
         {
-          loading ? <Box sx={{ display: 'flex' }} className="loading-div"><CircularProgress color="success" /></Box> :
+          loading ? <Box sx={{ display: 'flex' }} className="loading-div"><Loader sx={{ position:'absolute',width:"10%",height:"10%",top:"45%",left:"45%" }} /></Box> :
         currentProjects.map(({id, ...otherProjectProps }) => (
                         <Projectitem key={id} callingId={id} {...otherProjectProps} />
                     ))

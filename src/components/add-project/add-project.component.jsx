@@ -40,7 +40,7 @@ function AddProject({setProjectData,currentUser,setOpened}) {
   }
   const resetValues=()=>{
     setProjectTitle('');
-    setOverview(initialValue);
+    setOverview("");
     setStartDate('');
     setEndDate('');
     setStatus('');
@@ -71,7 +71,7 @@ function AddProject({setProjectData,currentUser,setOpened}) {
 
       <Group mt="md" position='apart'>
         <DatePicker placeholder="Pick Start Data" label="Start Date: " required  name="startDate" value={startDate}
-        onChange={setStartDate}
+        onChange={setStartDate} 
         sx={{ width:"45%",minWidth:200 }} />
         <DatePicker placeholder="Pick End Data" label="End Date: " required name="endDate" value={endDate}
         onChange={setEndDate}

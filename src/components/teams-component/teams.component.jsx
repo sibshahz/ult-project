@@ -2,7 +2,7 @@ import React from 'react'
 
 function Teams() {
   return (
-    <div>Teamsteams.component</div>
+    <div>Teams component</div>
   )
 }
 

@@ -1,11 +1,15 @@
 import React,{ useState } from 'react';
-import { IconGauge,IconUsers,IconSubtask } from '@tabler/icons';
+import { IconGauge,IconUsers,IconSubtask,IconHome } from '@tabler/icons';
 import { Box, NavLink } from '@mantine/core';
 import { Link, useLocation } from 'react-router-dom';
 
 const data = [
 //   { icon: IconGauge, label: 'Dashboard', description: 'Item with description' },
-  { icon: IconGauge, 
+{ icon: IconHome, 
+  label: 'Home',
+  to:'/',
+  },  
+{ icon: IconGauge, 
     label: 'Dashboard',
     to:'/dashboard',
     },

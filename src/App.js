@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import './App.css';
-import {Routes,Route,Link, Navigate} from "react-router-dom";
+import {Routes,Route,Link, Navigate,BrowserRouter as Router} from "react-router-dom";
 import DashboardPage from './pages/dashboard/dashboard.component';
 import SignInPage from './pages/sign-in/sign-in.component';
 import SignUpPage from './pages/sign-up/sign-up.component';
@@ -18,6 +18,7 @@ import Navigation from './components/navigation/navigation.component';
 import { AppShell, Navbar, Header } from '@mantine/core';
 import Tasks from './components/tasks-component/tasks.component';
 import Teams from './components/teams-component/teams.component';
+import LandingPage from './pages/landing/landing-page.component';
 
 
 
@@ -49,6 +50,8 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
+       
+
         <AppShell
           padding="md"
           navbar={<Navbar width={{ base: 250 }} height="100%" p="xs" open={false}><Navigation /></Navbar>}
@@ -58,18 +61,18 @@ class App extends React.Component{
           })}
         >
           <div className='main-content'>
-              <Routes>
-                {/* <Route path='/' element={<SignInPage />} /> */}
-                <Route path='/sign-in' element={<SignInPage />} />
-                <Route path='/sign-up' element={<SignUpPage />} />
-                <Route path='/tasks' element={
+          <Routes>
+                <Route path='/' element={<LandingPage />} />
+                <Route exact path='/sign-in' element={<SignInPage />} />
+                <Route exact path='/sign-up' element={<SignUpPage />} />
+                <Route exact path='/tasks' element={
                 <RequireAuth navigateTo="/sign-in"><Tasks /></RequireAuth>
                 } />
-                <Route path='/teams' element={
+                <Route exact path='/teams' element={
                 <RequireAuth navigateTo="/sign-in"><Teams /></RequireAuth>
                 }
                  />
-                <Route
+                <Route exact 
                     path="/dashboard"
                     element={
                     <RequireAuth navigateTo="/sign-in">

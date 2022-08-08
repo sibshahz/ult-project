@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth";
-import {Box,TextField,Button} from '@mui/material';
 import {auth,registerWithEmailAndPassword} from '../../firebase/firebase';
+
+import { TextInput, Button, Group,Box } from '@mantine/core';
 
 function SignUp(){
     const [userCredentials,setCredentials]=useState({signUpName:'',signUpEmail:'',signUpPassword:'',confirmPassword:''});
@@ -30,65 +31,48 @@ function SignUp(){
     return(
         <>
             <h2>Sign Up</h2>
-            <Box
-            component="form"
-            sx={{
-                '& .MuiTextField-root': { m: 1 },
-            }}
-            validate
-            autoComplete="on"
-            >
-                <TextField
-                sx={{ width:'46%' }}
+            <Box>
+                <TextInput
                 required
-                fullWidth
                 onChange={handleChange}
                 name="signUpName"
-                id="outlined-required-one"
+                placeholder="Name"
                 label="Name"
                 defaultValue="John Doe"
-                autoComplete="current-name"
                 />
-                <TextField
-                sx={{ width:'46%' }}
+                <TextInput
+                mt="md"
                 required
-                fullWidth
                 onChange={handleChange}
                 name="signUpEmail"
-                id="outlined-required-two"
+                placeholder="you@mail.com"
                 label="Email"
                 type="email"
-                defaultValue="your@mail.com"
-                autoComplete="current-email"
                 />
-                <TextField
-                sx={{ width:'46%' }}
-                id="outlined-password-input"
+                <TextInput
+                mt="md"
+                required
                 name="signUpPassword"
                 label="Password"
+                placeholder="Password"
                 onChange={handleChange}
                 type="password"
-                autoComplete="current-password"
                 />
-                <TextField
-                sx={{ width:'46%' }}
-                id="outlined-password-input-two"
+                <TextInput
+                mt="md"
+                required
                 name="confirmPassword"
                 onChange={handleChange}
                 label="Confirm Password"
+                placeholder="Confirm Password"
                 type="password"
                 />
                 <Button 
-                id="sign-in-button fullWidthTwo"
-                variant="contained"
-                fullWidth
+                mt="md"
                 onClick={handleSubmit}
-                sx={{
-                    width: '175px',
-                    m:1,
-                    height: 56,
-                    }
-                }
+                sx={{ 
+                    minWidth:100
+                   }}
                 >Sign up</Button>
                 <p>Already have an account? <Link to={'/sign-in'}>Sign in</Link> </p>
             </Box>

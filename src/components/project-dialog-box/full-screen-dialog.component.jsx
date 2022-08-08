@@ -1,39 +1,16 @@
 import React,{useState,useEffect} from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-import AddIcon from '@mui/icons-material/Add';
-import { TextField } from '@mui/material';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { connect } from 'react-redux';
 import { setProjectData,setProjectsData } from '../../redux/projects/projects.actions';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentProjects } from '../../redux/projects/projects.selectors';
 import { IconPlus } from '@tabler/icons';
-import { getProjectsList } from '../../redux/projects/projects.utils';
 
 import { Drawer, useMantineTheme,Card } from '@mantine/core';
 
 import AddProject from '../add-project/add-project.component';
 import './full-screen-dialog.styles.css';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 function FullScreenDialog({setProjectData,setProjectsData,currentProjects,currentUser}) {
   const [open, setOpen] = React.useState(false);
@@ -85,7 +62,7 @@ function FullScreenDialog({setProjectData,setProjectsData,currentProjects,curren
       
     </Drawer>
     <Card className="add-project-box" onClick={() => setOpened(true)} shadow="sm" p="lg" radius="md" withBorder={false} 
-      sx={{ margin:8,minWidth:320,maxWidth:320,textAlign:'center',
+      sx={{ margin:8,minWidth:320,maxWidth:320,textAlign:'center', minHeight:410,
       display:'flex', alignItems:'center',justifyContent:'center'}}>
     <IconPlus>Add new project</IconPlus>
     </Card>

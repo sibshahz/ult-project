@@ -1,14 +1,6 @@
 import React from 'react';
 import { IconDots, IconTrash,IconEdit,IconCheck } from '@tabler/icons';
 import { openConfirmModal } from '@mantine/modals';
-// import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
-// import CardHeader from '@mui/material/CardHeader';
-// import CardContent from '@mui/material/CardContent';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-// import IconButton from '@mui/material/IconButton';
-// import MoreIcon from '@mui/icons-material/MoreHoriz';
 import { deleteProject } from '../../redux/projects/projects.utils';
 import { showNotification } from '@mantine/notifications';
 

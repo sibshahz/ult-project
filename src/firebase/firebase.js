@@ -72,9 +72,6 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       authProvider: "local",
       email,
     });
-    await addDoc(collection(db,user.uid),{
-      projectTitle:"First project"
-    });
   } catch (err) {
     console.error(err);
     alert(err.message);

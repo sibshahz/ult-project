@@ -1,5 +1,8 @@
 import { Menu, Button, Text } from '@mantine/core';
-import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconLogout } from '@tabler/icons';
+import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconLogout,
+  IconUser,IconMail
+
+} from '@tabler/icons';
 import { auth } from '../../firebase/firebase';
 function AccountMenu({user}) {
   return (
@@ -22,8 +25,10 @@ function AccountMenu({user}) {
         <Menu.Divider />
 
         <Menu.Label>Account</Menu.Label>
-        <Menu.Item sx={{ textTransform:'capitalize' }}><Text weight={500}>{user.name}</Text></Menu.Item>
-        <Menu.Item sx={{ textTransform:'lowercase' }}><Text weight={300}>{user.email}</Text></Menu.Item>
+        <Menu.Item icon={<IconUser size={14} />} 
+          sx={{ textTransform:'capitalize' }} >{user.name}</Menu.Item>
+        <Menu.Item icon={<IconMail size={14} />}
+          sx={{ textTransform:'lowercase' }} >{user.email}</Menu.Item>
         <Menu.Item color="red" onClick={() => auth.signOut()} icon={<IconLogout size={14} />}>Logout</Menu.Item>
       </Menu.Dropdown>
     </Menu>

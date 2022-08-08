@@ -1,12 +1,13 @@
 import React,{useState,useEffect} from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth";
-import { TextField,Button,Box } from '@mui/material';
+
 import { auth,signInWithGoogle,logInWithEmailAndPassword } from "../../firebase/firebase";
-import GoogleIcon from '@mui/icons-material/Google';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+
+import { TextInput, Button, Group,Box } from '@mantine/core';
 
 
 const SignIn=({currentUser})=>{
@@ -31,65 +32,45 @@ const SignIn=({currentUser})=>{
     return(
       <>
       <h2>Sign In</h2>
-        <Box
-            component="form"
-            sx={{
-                '& .MuiTextField-root': { m: 1 },
-                
-            }}
-            validate
-            autoComplete="on"
-            >
+        <Box>
         <div className="sign-in">
             
-         <TextField
+         <TextInput
           required
-          fullWidth
           onChange={handleChange}
-          id="outlined-required-two fullWidthOne"
           label="Email"
+          placeholder="Email"
           type="email"
           value={email}
           name="email"
-          defaultValue="your@mail.com"
-          autoComplete="current-email"
         />
-        <TextField
-          id="outlined-password-input fullWidthTwo"
+        <TextInput
+          required
+          mt="md"
           onChange={handleChange}
           label="Password"
+          placeholder="Password"
           value={password}
           type="password"
           name="password"
-          fullWidth
-          autoComplete="current-password"
         />
+        <Group position="apart" mt="md">
         <Button 
-        id="fullWidth"
+        sx={{ 
+          minWidth:100
+         }}
         onClick={handleSubmit}
-        variant="contained"
-        fullWidth
-        sx={{
-            width: '175px',
-            m:1,
-            height: 56,
-            }
-          }
+
         >Sign In</Button>
-        </div>
+        
         <Button 
-        id="fullWidthThree"
+        sx={{ 
+          minWidth:100
+         }}
         onClick={signInWithGoogle}
-        startIcon={<GoogleIcon />}
-        variant="contained"
-        fullWidth
-        sx={{
-            width: '175px',
-            m:1,
-            height: 56,
-            }
-          }
-        >Sign In</Button>
+        >Google</Button>
+        </Group>
+        </div>
           <p>Dont have an account yet? <Link to={'/sign-up'}>Sign up</Link> </p>
         </Box>
         </>

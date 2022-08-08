@@ -7,7 +7,6 @@ import { selectCurrentProjects } from '../../redux/projects/projects.selectors';
 import FullScreenDialog from '../project-dialog-box/full-screen-dialog.component';
 import { selectCurrentUserId } from '../../redux/user/user.selectors';
 import Projectitem from '../project-item/project-item.component';
-import Card from '@mui/material/Card';
 import './projects-directory.styles.css';
 
 

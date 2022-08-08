@@ -26,7 +26,7 @@ root.render(
             </NotificationsProvider>
           </ModalsProvider>
         </MantineProvider>
-      </BrowserRouter>
+        </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
