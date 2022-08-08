@@ -12,9 +12,12 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 import { setCurrentUserId } from './redux/user/user.actions';
 import {auth}  from './firebase/firebase';
 import RequireAuth from './components/require-auth/require-auth.component';
+import Navigation from './components/navigation/navigation.component';
 
 
 import { AppShell, Navbar, Header } from '@mantine/core';
+import Tasks from './components/tasks-component/tasks.component';
+import Teams from './components/teams-component/teams.component';
 
 
 
@@ -48,7 +51,7 @@ class App extends React.Component{
       <div className="App">
         <AppShell
           padding="md"
-          navbar={<Navbar width={{ base: 300 }} height={500} p="xs" open={false}>{/* Navbar content */}</Navbar>}
+          navbar={<Navbar width={{ base: 250 }} height="100%" p="xs" open={false}><Navigation /></Navbar>}
           header={<Header height={60} p="xs" ><HeaderComponent /></Header>}
           styles={(theme) => ({
             main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
@@ -59,6 +62,13 @@ class App extends React.Component{
                 {/* <Route path='/' element={<SignInPage />} /> */}
                 <Route path='/sign-in' element={<SignInPage />} />
                 <Route path='/sign-up' element={<SignUpPage />} />
+                <Route path='/tasks' element={
+                <RequireAuth navigateTo="/sign-in"><Tasks /></RequireAuth>
+                } />
+                <Route path='/teams' element={
+                <RequireAuth navigateTo="/sign-in"><Teams /></RequireAuth>
+                }
+                 />
                 <Route
                     path="/dashboard"
                     element={

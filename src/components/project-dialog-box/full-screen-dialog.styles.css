@@ -1,3 +1,7 @@
 #project-add-drawer.project-add-drawer{
     overflow: scroll!important;
 }
+.add-project-box:hover{
+cursor: pointer;
+opacity: 0.7;
+}

@@ -23,11 +23,13 @@ import { connect } from 'react-redux';
 import { setProjectData,setProjectsData } from '../../redux/projects/projects.actions';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentProjects } from '../../redux/projects/projects.selectors';
+import { IconPlus } from '@tabler/icons';
 import { getProjectsList } from '../../redux/projects/projects.utils';
 
-import { Drawer, useMantineTheme } from '@mantine/core';
+import { Drawer, useMantineTheme,Card } from '@mantine/core';
 
 import AddProject from '../add-project/add-project.component';
+import './full-screen-dialog.styles.css';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -82,8 +84,12 @@ function FullScreenDialog({setProjectData,setProjectsData,currentProjects,curren
       <AddProject setOpened={setOpened} />
       
     </Drawer>
-    
-      <Button onClick={() => setOpened(true)}>Open Drawer</Button>
+    <Card className="add-project-box" onClick={() => setOpened(true)} shadow="sm" p="lg" radius="md" withBorder={false} 
+      sx={{ margin:8,minWidth:320,maxWidth:320,textAlign:'center',
+      display:'flex', alignItems:'center',justifyContent:'center'}}>
+    <IconPlus>Add new project</IconPlus>
+    </Card>
+
       
     {/* <div>
     

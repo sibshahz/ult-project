@@ -16,6 +16,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountMenu from "../account-menu/account-menu.component";
+import { Group,Text } from '@mantine/core';
 
 class HeaderComponent extends React.Component{
     
@@ -24,11 +25,14 @@ class HeaderComponent extends React.Component{
 
         return(
             <div className="header-menu">
+                <Group position="apart" pr="lg" pl="lg">
+                <Text weight={800} ml="lg" >ULT-PROJECT</Text>
                  {
                         this.props.currentUser ?
                         <AccountMenu user={this.props.currentUser} />
                         : null
                 }
+                </Group>
                 </div>
             // this.props.currentUser ?
             // <div>

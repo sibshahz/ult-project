@@ -70,7 +70,6 @@ const ProjectsDirectoryHooks=({currentProjects,setProjectsData})=> {
   // }
     return (
     <div className='projects-directory'>
-      <div>Projects Directory:</div>
       
       <div className='projects-items-list'>
       

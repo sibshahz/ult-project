@@ -68,7 +68,6 @@ export class ProjectsDirectory extends React.Component {
   render() {
     return (
     <div className='projects-directory'>
-      <div>Projects Directory:</div>
       <div className='projects-items-list'>
        
         {this.props.currentProjects.map(({id, ...otherProjectProps }) => (
