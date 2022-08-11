@@ -4,23 +4,32 @@ import { NumberInput, TextInput, ButtonText,Box,Group,Text,Button,Center,Select 
 import { DatePicker} from '@mantine/dates';
 import { RichTextEditor } from '@mantine/rte';
 import { connect } from 'react-redux';
-import { setProjectData } from '../../redux/projects/projects.actions';
+import { setProjectData, setSelectedProject } from '../../redux/projects/projects.actions';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons';
+import { selectEditingProject, selectSelectedProject } from '../../redux/projects/projects.selectors';
 
 
-function AddProject({setProjectData,currentUser,setOpened}) {
-  const initialValue =
-  '<p>Add complete detail of your <b>project</b> here, you can also add, images, link to videos and embed code snippets</p>';
+function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
+
   const [projectTitle, setProjectTitle] = useState('');
-  const [overview, setOverview] = useState(initialValue);
+  const [overview, setOverview] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [status, setStatus] = useState('');
   const [priority, setPriority] = useState('');
-
+  useEffect(()=>{
+    if(selectedProject){
+      setProjectTitle(selectedProject.projectTitle);
+      setOverview(String(selectedProject.overview));
+      setStartDate(String(selectedProject.startDate));
+      setEndDate(String(selectedProject.endDate));
+      setStatus(selectedProject.status);
+      setPriority(selectedProject.priority);
+    }
+  },[selectedProject])
   const onSubmit=async ()=>{
     await setProjectData({
       projectTitle,
@@ -46,6 +55,8 @@ function AddProject({setProjectData,currentUser,setOpened}) {
     setStatus('');
     setPriority('');
   }
+
+  
   // useEffect(()=>{
   //   console.log("PROJECT TITLE IS: ", projectTitle);
   // },[projectTitle]);
@@ -66,7 +77,7 @@ function AddProject({setProjectData,currentUser,setOpened}) {
       <TextInput label="Project Name" mt="md" placeholder="Project Name" value={projectTitle} onChange={(event) => setProjectTitle(event.currentTarget.value)} />
     
       <Group position='center' mt="md">
-        <RichTextEditor value={overview} onChange={setOverview} stickyOffset={1} rows={400} required />
+        <RichTextEditor value={overview} onChange={(event) => setOverview(event)} stickyOffset={1} rows={400} required />
       </Group>
 
       <Group mt="md" position='apart'>
@@ -115,11 +126,12 @@ function AddProject({setProjectData,currentUser,setOpened}) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  selectedProject:selectSelectedProject
 });
 
 const mapDispatchToProps = dispatch => ({
-  setProjectData: projectDetails => dispatch(setProjectData(projectDetails)),
+  setProjectData: projectDetails => dispatch(setProjectData(projectDetails))
 });
 
 export default connect(

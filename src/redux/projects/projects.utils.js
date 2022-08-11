@@ -7,12 +7,45 @@ import {
     getDocs,
     collection,
     deleteDoc,
-
+  updateDoc,
     doc,
     where,
     addDoc,
     orderBy,
+    setDoc,
+    getDoc,
+    connectFirestoreEmulator
   } from "firebase/firestore";
+
+export const editProject=async (projectId,projectDetails)=>{
+  const {editProjectTitle,editStartDate,editEndDate,editOverview,editPriority,editStatus,projectAuthor}=projectDetails;
+  const id=projectId;
+  const examcollref = doc(db,'projects', id)
+  await updateDoc(examcollref,{
+    projectTitle:editProjectTitle,
+      overview:editOverview,
+      startDate:editStartDate,
+      endDate:editEndDate,
+      priority:editPriority,
+      status:editStatus,
+      projectAuthor:projectAuthor
+  } ).catch(error =>{
+    console.log(error.message)
+  })
+ 
+  // await db.collection("projects").doc(projectId).update({
+  //   projectTitle,
+  //     overview,
+  //     startDate,
+  //     endDate,
+  //     priority,
+  //     status,
+  //     projectAuthor
+  // }).then(function() {
+  //   console.log("Frank food updated");
+  // });
+ 
+}
 export const addProject=async (projectDetails)=>{
   const {projectTitle,startDate,endDate,overview,priority,status,projectAuthor}=projectDetails;
   // const docRef = doc(db, "users", userId);

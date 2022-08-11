@@ -2,7 +2,9 @@ import { ProjectsActionTypes } from './projects.types';
 import { addProject} from './projects.utils';
 
 const INITIAL_STATE = {
-  currentProjects: []
+  currentProjects: [],
+  editingProject:false,
+  selectedProject:false
 };
 
 const projectsReducer = (state = INITIAL_STATE, action) => {
@@ -18,7 +20,22 @@ const projectsReducer = (state = INITIAL_STATE, action) => {
       return{
         ...state,
         currentProjects:action.payload
-      }
+    }
+    case ProjectsActionTypes.SET_PROJECT_EDITING:
+      return{
+        ...state,
+        editingProject:action.payload
+    }
+    case ProjectsActionTypes.SET_SELECTED_PROJECT:
+      return{
+        ...state,
+        selectedProject:action.payload
+    }
+    case ProjectsActionTypes.REMOVE_SELECTED_PROJECT:
+      return{
+        ...state,
+        selectedProject:action.payload
+    }
     default:
       return state;
   }

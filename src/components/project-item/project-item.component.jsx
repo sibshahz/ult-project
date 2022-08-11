@@ -1,13 +1,16 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { IconDots, IconTrash,IconEdit,IconCheck } from '@tabler/icons';
 import { openConfirmModal } from '@mantine/modals';
 import { deleteProject } from '../../redux/projects/projects.utils';
 import { showNotification } from '@mantine/notifications';
 
 import { Card, Image, Text, Badge, Button, Group,Spoiler,Menu,ActionIcon,Notification } from '@mantine/core';
+import { connect } from 'react-redux/es/exports';
+import { createStructuredSelector } from 'reselect';
+import { setProjectEditing, setSelectedProject } from '../../redux/projects/projects.actions';
+import { selectEditingProject, selectSelectedProject } from '../../redux/projects/projects.selectors';
 
-
-export default function Projectitem({endDate,priority,overview,team,projectTitle,status,startDate,id,callingId}) {
+function Projectitem({endDate,priority,overview,projectAuthor,team,projectTitle,status,startDate,id,callingId,editingProject,selectedProject,setProjectEditing,setSelectedProject}) {
   async function handleDelete(callingId){
 
     await deleteProject(callingId);
@@ -17,21 +20,24 @@ export default function Projectitem({endDate,priority,overview,team,projectTitle
             color:'green', title:projectTitle
           });
   }
-  function handleClick(){
-    return;
+  function handleEdit(){
+    setProjectEditing(true);
+    setSelectedProject({
+      projectTitle,projectAuthor,overview,startDate:startDate.toString(),endDate:endDate.toString(),status,priority,id:callingId
+    });
   }
 
   const openDeleteModal = () =>
   openConfirmModal({
-    title: 'Delete your profile',
+    title: `Delete ${projectTitle}`,
     centered: true,
     children: (
       <Text size="sm">
-        Are you sure you want to delete your profile? This action is destructive and you will have
+        Are you sure you want to delete project {projectTitle}? This action is destructive and you will have
         to contact support to restore your data.
       </Text>
     ),
-    labels: { confirm: 'Delete account', cancel: "No don't delete it" },
+    labels: { confirm: 'Delete project', cancel: "No don't delete it" },
     confirmProps: { color: 'red' },
     onCancel: () => showNotification({
                       title: 'Canceled',
@@ -55,7 +61,7 @@ return(
             </Menu.Target>
 
             <Menu.Dropdown>
-              <Menu.Item icon={<IconEdit size={14} />}>Quick Edit</Menu.Item>
+              <Menu.Item onClick={handleEdit} icon={<IconEdit size={14} />}>Quick Edit</Menu.Item>
               <Menu.Item icon={<IconTrash size={14}  />} color="red" onClick={openDeleteModal}>
                 Delete
               </Menu.Item>
@@ -94,40 +100,23 @@ return(
       </Text>
 
       <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-      Learn More
+      View Timeline
       </Button>
     </Card>
-
-
-
-    {/* <Card sx={{ minWidth: 275,width:280,ml:1,mb:1,mt:1 }} className="project-item" key={id}>
-   
-      <CardContent>
-      <CardHeader
-        sx={{ 
-          padding:0,
-          pb:1
-         }}
-        action={
-          <IconButton aria-label="settings" onClick={handleDelete}>
-            <MoreIcon />
-          </IconButton>
-        }
-        title={projectTitle}
-        subheader={`Status: ${status}`}
-      />
-
-        <Typography variant="body2">
-          {overview}
-        </Typography>
-        <Typography sx={{ margin: 1.5,ml:0 }} color="text.secondary">
-          Priority: {priority}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={handleClick}>Learn More</Button>
-      </CardActions>
-    </Card> */}
     </>
   )
 }
+
+const mapStateToProps = createStructuredSelector({
+  editingProject: selectEditingProject
+});
+
+const mapDispatchToProps = dispatch => ({
+  setSelectedProject: projectDetails => dispatch(setSelectedProject(projectDetails)),
+  setProjectEditing: setting => dispatch(setProjectEditing(setting))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Projectitem);
