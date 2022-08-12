@@ -18,7 +18,7 @@ function LandingPage() {
       <Grid.Col span={4}>
       <Timeline active={3} bulletSize={24} lineWidth={2}>
       <Timeline.Item bullet={<IconCheck size={12} />} title="Create New Project">
-        <Text color="dimmed" size="sm">You have create a new project, now you can create timeline of tasks in same project or go to the next step.</Text>
+        <Text color="dimmed" size="sm">You have created a new project, now you can create timeline of tasks in same project or go to the next step.</Text>
       </Timeline.Item>
 
       <Timeline.Item bullet={<IconCheck size={12} />} title="Create a new team">
