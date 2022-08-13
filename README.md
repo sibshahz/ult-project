@@ -1,3 +1,7 @@
+# Note:
+I am working on this project continuously, to test and implement everything I know and learn about front end tech and react. I would be implementing many cool features and yes sometimes it may have some bugs to as it is not a production project but a project to showcase my skills :)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
