@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import './App.css';
-import {Routes,Route,Link, Navigate,BrowserRouter as Router} from "react-router-dom";
+import {Routes,Route,Link,Redirect, Navigate,BrowserRouter as Router} from "react-router-dom";
 import DashboardPage from './pages/dashboard/dashboard.component';
 import SignInPage from './pages/sign-in/sign-in.component';
 import SignUpPage from './pages/sign-up/sign-up.component';
@@ -80,6 +80,7 @@ class App extends React.Component{
                     </RequireAuth>
                     }
                 />
+            
               </Routes>
             </div>
         </AppShell> 

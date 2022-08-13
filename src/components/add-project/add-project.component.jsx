@@ -20,16 +20,7 @@ function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
   const [endDate, setEndDate] = useState('');
   const [status, setStatus] = useState('');
   const [priority, setPriority] = useState('');
-  useEffect(()=>{
-    if(selectedProject){
-      setProjectTitle(selectedProject.projectTitle);
-      setOverview(String(selectedProject.overview));
-      setStartDate(String(selectedProject.startDate));
-      setEndDate(String(selectedProject.endDate));
-      setStatus(selectedProject.status);
-      setPriority(selectedProject.priority);
-    }
-  },[selectedProject])
+
   const onSubmit=async ()=>{
     await setProjectData({
       projectTitle,
