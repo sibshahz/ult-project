@@ -20,7 +20,7 @@ function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
   const [editStatus, setEditStatus] = useState(' ');
   const [editPriority, setEditPriority] = useState(' ');
   useEffect(()=>{
-    if(selectedProject){
+    if(editingProject){
       setEditOpened(true);
       setEditProjectTitle(selectedProject.projectTitle);
     setEditOverview(selectedProject.overview);
@@ -29,7 +29,7 @@ function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
     setEditStatus(parseInt(selectedProject.status));
     setEditPriority(parseInt(selectedProject.priority));
     }
-  },[selectedProject]);
+  },[editingProject]);
 
 
   const onSubmit=async ()=>{
@@ -42,7 +42,13 @@ function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
       editPriority,
       projectAuthor:selectedProject.projectAuthor
     });
+    setProjectEditing(false);
+
     // resetValues();
+  }
+  const handleClose=()=>{
+    setProjectEditing(false);
+    setEditOpened(false)
   }
   const resetValues=()=>{
     setEditProjectTitle('');
@@ -51,6 +57,7 @@ function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
     setEditEndDate('');
     setEditStatus('');
     setEditPriority('');
+    setEditOpened(false);
   }
 
   return (
@@ -62,7 +69,7 @@ function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
       }}
      className='project-edit-drawerYellow'
       opened={editOpened}
-      onClose={()=> setEditOpened(false)}
+      onClose={handleClose}
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
       position="bottom"
        size="100%"

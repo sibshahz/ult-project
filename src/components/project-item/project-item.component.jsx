@@ -11,7 +11,11 @@ import { setProjectEditing, setSelectedProject } from '../../redux/projects/proj
 import { selectEditingProject, selectSelectedProject } from '../../redux/projects/projects.selectors';
 
 function Projectitem({endDate,priority,overview,projectAuthor,team,projectTitle,status,startDate,id,callingId,editingProject,selectedProject,setProjectEditing,setSelectedProject}) {
-  async function handleDelete(callingId){
+ 
+const start=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(startDate);
+const end=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(endDate);
+ 
+async function handleDelete(callingId){
 
     await deleteProject(callingId);
           showNotification({
@@ -23,7 +27,7 @@ function Projectitem({endDate,priority,overview,projectAuthor,team,projectTitle,
   function handleEdit(){
     setProjectEditing(true);
     setSelectedProject({
-      projectTitle,projectAuthor,overview,startDate:startDate.toString(),endDate:endDate.toString(),status,priority,id:callingId
+      projectTitle,projectAuthor,overview,startDate:startDate,endDate:endDate,status,priority,id:callingId
     });
   }
 
@@ -46,13 +50,13 @@ function Projectitem({endDate,priority,overview,projectAuthor,team,projectTitle,
                     }),
     onConfirm: () => handleDelete(callingId),
   });
-
+  
 return(
     <>
   <Card shadow="sm" p="lg" radius="md" withBorder sx={{ margin:8,minWidth:320,maxWidth:320 }}>
   <Card.Section withBorder inheritPadding py="xs">
         <Group position="apart">
-          <Text weight={500}>Project:</Text>
+          <Text weight={300}>{start} - {end}</Text>
           <Menu withinPortal position="bottom-end" shadow="sm">
             <Menu.Target>
               <ActionIcon>

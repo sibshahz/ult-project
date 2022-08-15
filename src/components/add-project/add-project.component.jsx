@@ -16,10 +16,23 @@ function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
 
   const [projectTitle, setProjectTitle] = useState('');
   const [overview, setOverview] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [status, setStatus] = useState('');
   const [priority, setPriority] = useState('');
+
+  const handleDateStart=(event)=>{
+    // console.log("START DATE BEFORE FORMATING IS: ", event);
+    const start=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(startDate);
+    setStartDate(start);
+    // console.log("Start date is:", start);
+  }
+  const handleDateEnd=(event)=>{
+  
+    const end=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(endDate);
+    setEndDate(end);
+    // console.log("END DATE IS: ", end);
+  }
 
   const onSubmit=async ()=>{
     await setProjectData({
@@ -41,8 +54,8 @@ function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
   const resetValues=()=>{
     setProjectTitle('');
     setOverview("");
-    setStartDate('');
-    setEndDate('');
+    setStartDate(new Date());
+    setEndDate(new Date());
     setStatus('');
     setPriority('');
   }
@@ -73,10 +86,11 @@ function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
 
       <Group mt="md" position='apart'>
         <DatePicker placeholder="Pick Start Data" label="Start Date: " required  name="startDate" value={startDate}
-        onChange={setStartDate} 
+        onChange={handleDateStart}   inputFormat="MM/DD/YYYY" 
+        labelFormat="MM/DD/YYYY" 
         sx={{ width:"45%",minWidth:200 }} />
         <DatePicker placeholder="Pick End Data" label="End Date: " required name="endDate" value={endDate}
-        onChange={setEndDate}
+        onChange={handleDateEnd} labelFormat="MM/DD/YYYY" inputFormat="MM/DD/YYYY"
         sx={{ width:"45%",minWidth:200 }} />
       </Group>
 

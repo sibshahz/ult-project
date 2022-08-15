@@ -19,6 +19,7 @@ import {
     query,
     onSnapshot,
     collection,
+    doc,
     getDocs,
   } from "firebase/firestore";
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -39,9 +40,11 @@ const ProjectsDirectory=({currentProjects,setProjectsData})=> {
         try{
      
           var projectsRef = collection(db, "projects");
+          const userRef = doc(db, "users",user.uid);
+
           // const q =query(collection(db, user.uid));
       
-          const q = query(projectsRef,where("projectAuthor","==",user.uid));
+          const q = query(projectsRef,where("projectAuthor","==",userRef));
           // const q = query(projectsRef);
         
             unsubscribeFromProjects =onSnapshot(q, (querySnapshot) => {
@@ -49,7 +52,8 @@ const ProjectsDirectory=({currentProjects,setProjectsData})=> {
               querySnapshot.forEach((doc) => {
                   projects.push(
                     {
-                      ...doc.data(),
+                      // ...doc.data(),
+                      projectTitle:doc.data().projectTitle,
                       id:doc.id
                     });
               });

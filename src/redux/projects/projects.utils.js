@@ -48,8 +48,7 @@ export const editProject=async (projectId,projectDetails)=>{
 }
 export const addProject=async (projectDetails)=>{
   const {projectTitle,startDate,endDate,overview,priority,status,projectAuthor}=projectDetails;
-  // const docRef = doc(db, "users", userId);
-
+    const authorRef = doc(db, "users",projectAuthor);
     const res=await addDoc(collection(db, "projects"), {
         projectTitle,
         overview,
@@ -57,7 +56,7 @@ export const addProject=async (projectDetails)=>{
         endDate,
         priority,
         status,
-        projectAuthor
+        projectAuthor:authorRef,
       });
 
       
@@ -75,7 +74,16 @@ export const getProjectsList=async ()=>{
   const querySnapshot = await getDocs(collection(db, "projects"));
   querySnapshot.forEach((doc) => {
 
-  projects.push({...doc.data(),id: doc.id});
+  // projects.push({...doc.data(),id: doc.id});
+  
+  projects.push({
+    projectTitle:doc.data().projectTitle,
+    overview:doc.data().overview,
+    startDate:doc.data().startDate.toDate().toDateString(),
+    endDate:doc.data().Date.toDate().toDateString(),
+    status:doc.data().status,
+    priority:doc.data().priority,
+    id: doc.id});
   
   });
   return projects;

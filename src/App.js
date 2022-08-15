@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{lazy, Suspense} from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import './App.css';
@@ -13,12 +13,14 @@ import { setCurrentUserId } from './redux/user/user.actions';
 import {auth}  from './firebase/firebase';
 import RequireAuth from './components/require-auth/require-auth.component';
 import Navigation from './components/navigation/navigation.component';
+import { Loader } from '@mantine/core';
 
 
 import { AppShell, Navbar, Header } from '@mantine/core';
 import Tasks from './components/tasks-component/tasks.component';
 import Teams from './components/teams-component/teams.component';
-import LandingPage from './pages/landing/landing-page.component';
+
+const LandingPage = lazy(() => import('./pages/landing/landing-page.component'));
 
 
 
@@ -62,7 +64,11 @@ class App extends React.Component{
         >
           <div className='main-content'>
           <Routes>
-                <Route path='/' element={<LandingPage />} />
+                <Route path='/' element={
+                <Suspense fallback={<Loader sx={{ position:'absolute',width:"10%",height:"10%",top:"45%",left:"45%" }} />}>
+                    <LandingPage />
+                </Suspense>
+                } />
                 <Route exact path='/sign-in' element={<SignInPage />} />
                 <Route exact path='/sign-up' element={<SignUpPage />} />
                 <Route exact path='/tasks' element={
