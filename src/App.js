@@ -19,6 +19,7 @@ import { Loader } from '@mantine/core';
 import { AppShell, Navbar, Header } from '@mantine/core';
 import Tasks from './components/tasks-component/tasks.component';
 import Teams from './components/teams-component/teams.component';
+import { ProjectTasksDirectory } from './components/project-tasks/project-tasks-directory.component';
 
 const LandingPage = lazy(() => import('./pages/landing/landing-page.component'));
 
@@ -84,6 +85,14 @@ class App extends React.Component{
                     <RequireAuth navigateTo="/sign-in">
                       <DashboardPage />
                     </RequireAuth>
+                    }
+                />
+                <Route exact 
+                    path="/dashboard/project/"
+                    element={
+                    <RequireAuth navigateTo="/sign-in">
+                      <ProjectTasksDirectory />
+                      </RequireAuth>
                     }
                 />
             

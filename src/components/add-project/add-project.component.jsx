@@ -10,6 +10,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons';
 import { selectEditingProject, selectSelectedProject } from '../../redux/projects/projects.selectors';
+import { encodeDateInString } from '../functions.utils';
 
 
 function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
@@ -23,14 +24,13 @@ function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
 
   const handleDateStart=(event)=>{
     // console.log("START DATE BEFORE FORMATING IS: ", event);
-    const start=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(startDate);
-    setStartDate(start);
+    // const date=encodeDateInString(event);
+    setStartDate(event);
     // console.log("Start date is:", start);
   }
   const handleDateEnd=(event)=>{
-  
-    const end=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(endDate);
-    setEndDate(end);
+    // const date=encodeDateInString(event);
+    setEndDate(event);
     // console.log("END DATE IS: ", end);
   }
 
@@ -38,8 +38,8 @@ function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
     await setProjectData({
       projectTitle,
       overview,
-      startDate,
-      endDate,
+      startDate:encodeDateInString(startDate),
+      endDate:encodeDateInString(endDate),
       status,
       priority,
       projectAuthor:currentUser.id});
@@ -86,11 +86,11 @@ function AddProject({setProjectData,currentUser,setOpened,selectedProject}) {
 
       <Group mt="md" position='apart'>
         <DatePicker placeholder="Pick Start Data" label="Start Date: " required  name="startDate" value={startDate}
-        onChange={handleDateStart}   inputFormat="MM/DD/YYYY" 
-        labelFormat="MM/DD/YYYY" 
+        onChange={handleDateStart}   inputFormat="DD/MM/YYYY" 
+        labelFormat="DD/MM/YYYY" 
         sx={{ width:"45%",minWidth:200 }} />
         <DatePicker placeholder="Pick End Data" label="End Date: " required name="endDate" value={endDate}
-        onChange={handleDateEnd} labelFormat="MM/DD/YYYY" inputFormat="MM/DD/YYYY"
+        onChange={handleDateEnd} labelFormat="DD/MM/YYYY" inputFormat="DD/MM/YYYY"
         sx={{ width:"45%",minWidth:200 }} />
       </Group>
 

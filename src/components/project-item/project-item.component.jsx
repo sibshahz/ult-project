@@ -3,17 +3,19 @@ import { IconDots, IconTrash,IconEdit,IconCheck } from '@tabler/icons';
 import { openConfirmModal } from '@mantine/modals';
 import { deleteProject } from '../../redux/projects/projects.utils';
 import { showNotification } from '@mantine/notifications';
+import { Link } from 'react-router-dom';
 
 import { Card, Image, Text, Badge, Button, Group,Spoiler,Menu,ActionIcon,Notification } from '@mantine/core';
 import { connect } from 'react-redux/es/exports';
 import { createStructuredSelector } from 'reselect';
 import { setProjectEditing, setSelectedProject } from '../../redux/projects/projects.actions';
 import { selectEditingProject, selectSelectedProject } from '../../redux/projects/projects.selectors';
+import { encodeDateInString } from '../functions.utils';
 
 function Projectitem({endDate,priority,overview,projectAuthor,team,projectTitle,status,startDate,id,callingId,editingProject,selectedProject,setProjectEditing,setSelectedProject}) {
  
-const start=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(startDate);
-const end=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(endDate);
+// const start=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(startDate);
+// const end=new Intl.DateTimeFormat('en-US', {day: '2-digit', month: '2-digit',year: 'numeric'}).format(endDate);
  
 async function handleDelete(callingId){
 
@@ -56,7 +58,7 @@ return(
   <Card shadow="sm" p="lg" radius="md" withBorder sx={{ margin:8,minWidth:320,maxWidth:320 }}>
   <Card.Section withBorder inheritPadding py="xs">
         <Group position="apart">
-          <Text weight={300}>{start} - {end}</Text>
+          <Text weight={300}>{startDate} - {endDate}</Text>
           <Menu withinPortal position="bottom-end" shadow="sm">
             <Menu.Target>
               <ActionIcon>
@@ -103,9 +105,12 @@ return(
       </Spoiler>
       </Text>
 
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-      View Timeline
-      </Button>
+      <Link to="/dashboard/project/">
+        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+        View Timeline
+        </Button>
+      </Link>
+
     </Card>
     </>
   )

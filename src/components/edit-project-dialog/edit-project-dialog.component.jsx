@@ -9,23 +9,26 @@ import { createStructuredSelector } from 'reselect';
 import { showNotification } from '@mantine/notifications';
 import { editProject } from '../../redux/projects/projects.utils';
 import './edit-project-dialog.styles.css';
+import { decodeDateFromString, encodeDateInString } from '../functions.utils';
 
 function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
   const [editOpened, setEditOpened] = useState(false);
   const theme = useMantineTheme();
   const [editProjectTitle, setEditProjectTitle] = useState(' ');
   const [editOverview, setEditOverview] = useState(' ');
-  const [editStartDate, setEditStartDate] = useState(' ');
-  const [editEndDate, setEditEndDate] = useState(' ');
+  const [editStartDate, setEditStartDate] = useState(new Date());
+  const [editEndDate, setEditEndDate] = useState(new Date());
   const [editStatus, setEditStatus] = useState(' ');
   const [editPriority, setEditPriority] = useState(' ');
+  
+  
   useEffect(()=>{
     if(editingProject){
       setEditOpened(true);
       setEditProjectTitle(selectedProject.projectTitle);
     setEditOverview(selectedProject.overview);
-    setEditStartDate(selectedProject.startDate);
-    setEditEndDate(selectedProject.endDate);
+    setEditStartDate(decodeDateFromString(selectedProject.startDate));
+    setEditEndDate(decodeDateFromString(selectedProject.endDate));
     setEditStatus(parseInt(selectedProject.status));
     setEditPriority(parseInt(selectedProject.priority));
     }
@@ -36,8 +39,8 @@ function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
     editProject(selectedProject.id,{
       editProjectTitle,
       editOverview,
-      editStartDate,
-      editEndDate,
+      editStartDate:encodeDateInString(editStartDate),
+      editEndDate:encodeDateInString(editEndDate),
       editStatus,
       editPriority,
       projectAuthor:selectedProject.projectAuthor
@@ -92,10 +95,10 @@ function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
 
       <Group mt="md" position='apart'>
         <DatePicker placeholder="Pick Start Data" label="Start Date: " required  name="startDate" value={editStartDate}
-        onChange={setEditStartDate} 
+        onChange={setEditStartDate} labelFormat="DD/MM/YYYY" inputFormat="DD/MM/YYYY"
         sx={{ width:"45%",minWidth:200 }} />
         <DatePicker placeholder="Pick End Data" label="End Date: " required name="endDate" value={editEndDate}
-        onChange={setEditEndDate}
+        onChange={setEditEndDate} labelFormat="DD/MM/YYYY" inputFormat="DD/MM/YYYY"
         sx={{ width:"45%",minWidth:200 }} />
       </Group>
 

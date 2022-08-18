@@ -52,8 +52,12 @@ const ProjectsDirectory=({currentProjects,setProjectsData})=> {
               querySnapshot.forEach((doc) => {
                   projects.push(
                     {
-                      // ...doc.data(),
                       projectTitle:doc.data().projectTitle,
+                      overview:doc.data().overview,
+                      startDate:doc.data().startDate,
+                      endDate:doc.data().endDate,
+                      priority:doc.data().priority,
+                      status:doc.data().status,
                       id:doc.id
                     });
               });

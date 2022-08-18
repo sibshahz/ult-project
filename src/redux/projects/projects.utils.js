@@ -18,7 +18,7 @@ import {
   } from "firebase/firestore";
 
 export const editProject=async (projectId,projectDetails)=>{
-  const {editProjectTitle,editStartDate,editEndDate,editOverview,editPriority,editStatus,projectAuthor}=projectDetails;
+  const {editProjectTitle,editStartDate,editEndDate,editOverview,editPriority,editStatus}=projectDetails;
   const id=projectId;
   const examcollref = doc(db,'projects', id)
   await updateDoc(examcollref,{
@@ -27,8 +27,7 @@ export const editProject=async (projectId,projectDetails)=>{
       startDate:editStartDate,
       endDate:editEndDate,
       priority:editPriority,
-      status:editStatus,
-      projectAuthor:projectAuthor
+      status:editStatus
   } ).catch(error =>{
     console.log(error.message)
   })
