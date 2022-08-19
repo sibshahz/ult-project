@@ -1,9 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import TaskItems from '../project-task-items/task-items.component'
 
 export const ProjectTasksDirectory = (props) => {
   return (
-    <div>project-tasks-directory.component</div>
+    <>
+    <div>Tasks Directory:</div>
+    <TaskItems />
+    </>
   )
 }
 
