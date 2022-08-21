@@ -1,27 +1,26 @@
 import React,{useState} from 'react'
 import { connect } from 'react-redux';
-import { Divider, Input, TransferList,TransferListData,Button } from '@mantine/core';
-import {IconAt} from '@tabler/icons';
+import { Divider, Input, TransferList,TransferListData,Button,Table } from '@mantine/core';
+import {IconAt,IconTrash} from '@tabler/icons';
+import { MembersList } from '../members-list/members-list.component';
 
-const initialValues = [
-    [
-      { value: 'react', label: 'Shahid', group: 'Engineer' },
-      { value: 'ng', label: 'Zubair', group: 'Developer' },
-      { value: 'next', label: 'Rio', group: 'Dev Ops' },
-      { value: 'jq', label: 'John', group: 'Engineer' },
-      { value: 'sv', label: 'Dorrie', group: 'Engineer' },
-      { value: 'dj', label: 'Buttercup', group: 'Designer' },
-      { value: 'fl', label: 'Wonderwoman', group: 'UI Designer' },
-    ],
-    [
-        { value: 'next', label: 'Rio', group: 'Dev Ops' },
-        { value: 'jq', label: 'John', group: 'Engineer' },
-        { value: 'sv', label: 'Dorrie', group: 'Engineer' },
-    ],
-  ];
 
 export const TeamsForm = (props) => {
-  const [data,setData]=useState(initialValues);
+  const elements = [
+    { id:1,name: 'Shahid', email: 'shahid5ssg@gmail.com', role: 'engineer'},
+    { id:2,name: 'Roza', email: 'roza@gmail.com', role: 'designer'},
+    { id:3,name: 'John Doe', email: 'johndo@gmail.com', role: 'developer'},
+    { id:4,name: 'Aria Stark', email: 'ariastark@gmail.com', role: 'ux/ui'},
+    { id:5,name: 'Bryan Fury', email: 'bryanfury@gmail.com', role: 'qa'},
+  ];
+  const rows = elements.map((element) => (
+    <tr key={element.id}>
+      <td>{element.name}</td>
+      <td>{element.email}</td>
+      <td>{element.role}</td>
+      <td><IconTrash /></td>
+    </tr>
+  ));
   return (
     <div>
         <Input
@@ -32,14 +31,17 @@ export const TeamsForm = (props) => {
         />
         <Button my="sm">Request</Button>        <Button my="sm" disabled>Invite User</Button>
 
-        <Divider my="lg" variant="dotted" />
-
-        <TransferList
-            value={data}
-            onChange={setData}
-            searchPlaceholder="Search..."
-            nothingFound="Nothing here"
-        />
+        <Table highlightOnHover my="lg" striped>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </Table>
     </div>
   )
 }
