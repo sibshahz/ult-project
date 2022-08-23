@@ -10,6 +10,7 @@ import { showNotification } from '@mantine/notifications';
 import { editProject } from '../../redux/projects/projects.utils';
 import './edit-project-dialog.styles.css';
 import { decodeDateFromString, encodeDateInString } from '../functions.utils';
+import { IconCheck } from '@tabler/icons';
 
 function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
   const [editOpened, setEditOpened] = useState(false);
@@ -44,6 +45,11 @@ function EditProjectDialog({setProjectEditing,editingProject,selectedProject}){
       editStatus,
       editPriority,
       projectAuthor:selectedProject.projectAuthor
+    });
+    showNotification({
+      title: editProjectTitle,
+      message: 'edited, successfully! :)',
+      color:'green', icon:<IconCheck />,title:editProjectTitle
     });
     setProjectEditing(false);
 
