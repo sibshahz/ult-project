@@ -1,9 +1,7 @@
 import React,{useState} from 'react'
 import { connect } from 'react-redux';
-import { Divider, Input, TransferList,TransferListData,Button,Table } from '@mantine/core';
+import { Divider, Input, TransferList,TransferListData,Button,Table,Box } from '@mantine/core';
 import {IconAt,IconTrash} from '@tabler/icons';
-import { MembersList } from '../members-list/members-list.component';
-
 
 export const TeamsForm = (props) => {
   const elements = [
@@ -31,6 +29,10 @@ export const TeamsForm = (props) => {
         />
         <Button my="sm">Request</Button>        <Button my="sm" disabled>Invite User</Button>
 
+        <Box sx={{ 
+        maxHeight:400,
+        overflow:'auto',
+       }}>
         <Table highlightOnHover my="lg" striped>
           <thead>
             <tr>
@@ -42,6 +44,7 @@ export const TeamsForm = (props) => {
           </thead>
           <tbody>{rows}</tbody>
         </Table>
+        </Box>
     </div>
   )
 }

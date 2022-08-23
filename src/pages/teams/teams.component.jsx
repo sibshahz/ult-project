@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Tabs } from '@mantine/core';
 import { TeamsForm } from '../../components/teams-form/teams-form.component';
 import {IconUserPlus,IconUsers} from '@tabler/icons';
-import { MembersList } from '../../components/members-list/members-list.component';
+import { TeamsList } from '../../components/teams-list/teams-list.component';
 
 export const TeamsPage = () => {
   return (
@@ -21,7 +21,7 @@ export const TeamsPage = () => {
           </Tabs.Panel>
 
           <Tabs.Panel value="messages" pt="xs">
-            <MembersList />
+            <TeamsList />
           </Tabs.Panel>
         </Tabs>
 
