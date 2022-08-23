@@ -18,7 +18,7 @@ import { Loader } from '@mantine/core';
 
 import { AppShell, Navbar, Header } from '@mantine/core';
 import Tasks from './components/tasks-component/tasks.component';
-import { ProjectTasksDirectory } from './components/project-tasks/project-tasks-directory.component';
+import ProjectTasksDirectory  from './components/project-tasks/project-tasks-directory.component';
 import { TeamsPage } from './pages/teams/teams.component';
 const LandingPage = lazy(() => import('./pages/landing/landing-page.component'));
 

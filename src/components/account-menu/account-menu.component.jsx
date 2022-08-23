@@ -8,7 +8,7 @@ function AccountMenu({user}) {
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <Button><IconSettings /></Button>
+        <Button><IconSettings variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} /></Button>
       </Menu.Target>
 
       <Menu.Dropdown>

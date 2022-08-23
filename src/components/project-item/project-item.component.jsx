@@ -32,6 +32,11 @@ async function handleDelete(callingId){
       projectTitle,projectAuthor,overview,startDate:startDate,endDate:endDate,status,priority,id:callingId
     });
   }
+  const handleTimelineClick=()=>{
+    setSelectedProject({
+      projectTitle,projectAuthor,overview,startDate:startDate,endDate:endDate,status,priority,id:callingId
+    });
+  }
 
   const openDeleteModal = () =>
   openConfirmModal({
@@ -106,7 +111,7 @@ return(
       </Text>
 
       <Link to="/dashboard/project/">
-        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+        <Button variant="light" color="blue" fullWidth mt="md" radius="md" onClick={handleTimelineClick}>
         View Timeline
         </Button>
       </Link>

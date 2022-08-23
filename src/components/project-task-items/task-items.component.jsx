@@ -1,13 +1,15 @@
 import React from 'react';
 import { ActionIcon,Card,Group,Menu,Image,Button,Text,Badge,Spoiler } from '@mantine/core';
 import { IconDots, IconTrash,IconEdit,IconCheck } from '@tabler/icons';
+
 const handleEdit=()=>{
   return;
 }
 const openDeleteModal=()=>{
   return;
 }
-function TaskItems() {
+function TaskItems(props) {
+
   return (
     <div>
       <Card shadow="sm" p="lg" radius="md" withBorder sx={{ margin:8,minWidth:600,maxWidth:800 }}>
@@ -34,15 +36,12 @@ function TaskItems() {
       {/* <Notification icon={<IconCheck size={18} />} color="teal" title="Teal notification">
         This is teal notification with icon
       </Notification> */}
-        <Image
-          src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-          height={160}
-          alt="Norway"
-        />
+    
       </Card.Section>
 
       <Group position="apart" mt="md" mb="xs">
         <Text weight={500}>Task Title</Text>
+        <Text weight={300}>Assigned to: </Text>
       </Group>
       <Group position='apart' mt='md' mb="xs">
         <Badge color="green" variant="light">
@@ -68,4 +67,4 @@ function TaskItems() {
   )
 }
 
-export default TaskItems
+export default TaskItems;
