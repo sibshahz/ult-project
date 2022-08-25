@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth";
-import {auth,registerWithEmailAndPassword} from '../../firebase/firebase';
-
+import {auth,registerWithEmailAndPassword,signInWithGoogle} from '../../firebase/firebase';
+import {IconBrandGoogle} from '@tabler/icons';
 import { TextInput, Button, Group,Box } from '@mantine/core';
 
 function SignUp(){
@@ -67,13 +67,12 @@ function SignUp(){
                 placeholder="Confirm Password"
                 type="password"
                 />
-                <Button 
-                mt="md"
-                onClick={handleSubmit}
-                sx={{ 
-                    minWidth:100
-                   }}
-                >Sign up</Button>
+                <Group position="apart" mt="md">
+                <Button onClick={handleSubmit}>Sign up</Button>
+                <Button leftIcon={<IconBrandGoogle  />}
+                    onClick={signInWithGoogle}
+                    variant="outline">Sign up</Button>
+                </Group>
                 <p>Already have an account? <Link to={'/sign-in'}>Sign in</Link> </p>
             </Box>
         </>
