@@ -1,19 +1,19 @@
 import React,{useState,useEffect} from "react";
+import {connect} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth,registerWithEmailAndPassword,signInWithGoogle} from '../../firebase/firebase';
 import {IconBrandGoogle} from '@tabler/icons';
 import { TextInput, Button, Group,Box } from '@mantine/core';
-
-function SignUp(){
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+function SignUp({currentUser}){
     const [userCredentials,setCredentials]=useState({signUpName:'',signUpEmail:'',signUpPassword:'',confirmPassword:''});
     const {signUpName,signUpEmail, signUpPassword,confirmPassword}=userCredentials;
-    // const [user, loading, error] = useAuthState(auth);
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //     if (loading) return;
-    //     if (user) navigate("/dashboard");
-    //   }, [user, loading]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (currentUser) navigate("/dashboard");
+    });
     const handleSubmit=() =>{
 
         if(signUpPassword!==confirmPassword){
@@ -79,4 +79,13 @@ function SignUp(){
     );
 }
 
-export default SignUp;
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+  });
+  
+  
+  
+  export default connect(
+    mapStateToProps
+  )(SignUp);
+  

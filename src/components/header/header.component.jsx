@@ -21,7 +21,7 @@ class HeaderComponent extends React.Component{
                  {
                         this.props.currentUser ?
                         <AccountMenu user={this.props.currentUser} />
-                        : <Group position="apart" mt="md">
+                        : <Group position="apart">
                         <Link to="/sign-in"><Button>Sign In</Button></Link>
                         
                         <Link to="/sign-up">

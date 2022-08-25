@@ -32,7 +32,7 @@ export const TeamsList = () => {
       <td>{element.team}</td>
       <td>{element.members}</td>
       <td>{element.role}</td>
-      <td><IconTrash /><IconEdit /></td>
+      <td><Button mr="xs" variant='outline'><IconEdit /></Button><Button variant='outline'><IconTrash /></Button></td>
     </tr>
   ));
 
