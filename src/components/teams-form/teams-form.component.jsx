@@ -16,7 +16,7 @@ export const TeamsForm = (props) => {
       <td>{element.name}</td>
       <td>{element.email}</td>
       <td>{element.role}</td>
-      <td><IconTrash /></td>
+      <td><Button variant='outline'><IconTrash /></Button></td>
     </tr>
   ));
   return (

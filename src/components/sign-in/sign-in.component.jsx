@@ -8,6 +8,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import { TextInput, Button, Group,Box } from '@mantine/core';
+import {IconBrandGoogle} from '@tabler/icons';
 
 
 const SignIn=({currentUser})=>{
@@ -67,8 +68,10 @@ const SignIn=({currentUser})=>{
         sx={{ 
           minWidth:100
          }}
+         leftIcon={<IconBrandGoogle  />}
         onClick={signInWithGoogle}
-        >Google</Button>
+        variant="outline"
+        >Sign in</Button>
         </Group>
         </div>
           <p>Dont have an account yet? <Link to={'/sign-up'}>Sign up</Link> </p>

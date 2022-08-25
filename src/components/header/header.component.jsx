@@ -6,7 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import './header.styles.css';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import AccountMenu from "../account-menu/account-menu.component";
-import { Group,Text } from '@mantine/core';
+import { Group,Text,Button } from '@mantine/core';
+import {Link} from "react-router-dom";
 
 class HeaderComponent extends React.Component{
     
@@ -20,7 +21,15 @@ class HeaderComponent extends React.Component{
                  {
                         this.props.currentUser ?
                         <AccountMenu user={this.props.currentUser} />
-                        : null
+                        : <Group position="apart" mt="md">
+                        <Link to="/sign-in"><Button>Sign In</Button></Link>
+                        
+                        <Link to="/sign-up">
+                            <Button 
+                            variant="outline"
+                            >Sign up</Button>
+                        </Link>
+                        </Group>
                 }
                 </Group>
                 </div>
