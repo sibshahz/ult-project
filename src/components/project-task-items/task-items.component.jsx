@@ -12,7 +12,7 @@ function TaskItems(props) {
 
   return (
     <div>
-      <Card shadow="sm" p="lg" radius="md" withBorder sx={{ margin:8,minWidth:600,maxWidth:800 }}>
+      <Card shadow="sm" p="lg" radius="md" withBorder sx={{ marginTop:'16px',minWidth:600 }}>
   <Card.Section withBorder inheritPadding py="xs">
         <Group position="apart">
           <Text weight={300}>'End Date' - 'Start Date'</Text>

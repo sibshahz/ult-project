@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { selectSelectedProject,selectEditingProject } from '../../redux/projects/projects.selectors';
 import { setProjectEditing, setSelectedProject } from '../../redux/projects/projects.actions';
-import { Accordion, Text } from '@mantine/core';
+import { Accordion, Text,Badge,Title } from '@mantine/core';
 
 function ProjectTasksDirectory  ({selectedProject}) {
   const {projectTitle,overview,startDate,endDate,status,priority,id}=selectedProject;
@@ -18,14 +18,33 @@ function ProjectTasksDirectory  ({selectedProject}) {
 
   return (
     <>
-      <Accordion mb="lg">
-        <Accordion.Item value="projectTitle">
-          <Accordion.Control><Text weight={500}>Project: {projectTitle}</Text></Accordion.Control>
-          <Accordion.Panel>
-            <Text>Start Date: {startDate}</Text>
-            <Text>End Date: {endDate}</Text>
-            <Text>Status: {status}</Text>
-            <Text>Priority: {priority}</Text>
+      <Title order={4}>Project: {projectTitle}</Title>
+      <Accordion mb="lg" defaultValue="info">
+        <Accordion.Item value="info">
+          <Accordion.Control default><Text weight={500}>Info:</Text></Accordion.Control>
+          <Accordion.Panel pb={16}>
+            <div className='container' style={{ display:'flex',flexDirection:'row',justifyContent:'space-between' }}>
+            <div style={{ width: 200,marginBottom:8 }}>
+              <Badge variant="dot" fullWidth>
+                Started on: {startDate}
+              </Badge>
+            </div>
+            <div style={{ width:200,marginBottom:8 }}>
+              <Badge variant="dot" fullWidth>
+                Ends on: {endDate}
+              </Badge>
+            </div>
+            <div style={{ width:200,marginBottom:8 }}>
+              <Badge variant="dot" fullWidth>
+                Status: {status}
+              </Badge>
+            </div>
+            <div style={{ width:200,marginBottom:8 }}>
+              <Badge variant="dot" fullWidth>
+                Priority: {priority}
+              </Badge>
+            </div>
+            </div>
           </Accordion.Panel>
         </Accordion.Item>
 
