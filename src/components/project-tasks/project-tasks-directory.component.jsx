@@ -7,6 +7,7 @@ import { selectSelectedProject,selectEditingProject } from '../../redux/projects
 import { setProjectEditing, setSelectedProject } from '../../redux/projects/projects.actions';
 import { Accordion, Text,Badge,Title,Card } from '@mantine/core';
 import { IconPlus } from '@tabler/icons';
+import TaskDialog from '../task-dialog/task-dialog.component';
 function ProjectTasksDirectory  ({selectedProject}) {
   const {projectTitle,overview,startDate,endDate,status,priority,id}=selectedProject;
   // const navigate = useNavigate();  
@@ -58,11 +59,7 @@ function ProjectTasksDirectory  ({selectedProject}) {
       </Accordion>
     <div>Tasks Directory:</div>
     <TaskItems />
-    <Card className="add-project-box" onClick={() => console.log("OPEN SHAHZ ADD TASK")} shadow="sm" p="lg" radius="md" withBorder={true} 
-      sx={{ marginTop:'16px',minWidth:600,textAlign:'center', minHeight:180,
-      display:'flex', alignItems:'center',justifyContent:'center'}}>
-    <IconPlus>Add new project</IconPlus>
-    </Card>
+    <TaskDialog />
     </>
   )
 }
