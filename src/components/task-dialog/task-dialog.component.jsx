@@ -4,7 +4,7 @@ import {IconPlus} from "@tabler/icons";
 import TaskForm from '../task-form/task-form.component';
 import './task-dialog.styles.css';
 
-function TaskDialog() {
+const TaskDialog=() =>{
     const [taskOpened, setTaskOpened] = useState(false);
     const theme = useMantineTheme();
 
