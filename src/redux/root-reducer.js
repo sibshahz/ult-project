@@ -7,6 +7,7 @@ import projectsReducer from './projects/projects.reducer';
 
 import userReducer from './user/user.reducer';
 import thunk from 'redux-thunk';
+import tasksReducer from './tasks/tasks.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -16,7 +17,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  projects: projectsReducer
+  projects: projectsReducer,
+  tasks:tasksReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
