@@ -30,10 +30,10 @@ function TaskDialog() {
         <Card className="add-project-box" onClick={() => setTaskOpened(true)} shadow="sm" p="lg" radius="md" withBorder={true} 
             sx={{ marginTop:'16px',minWidth:600,textAlign:'center', minHeight:180,
             display:'flex', alignItems:'center',justifyContent:'center'}}>
-            <IconPlus>Add new task</IconPlus>
+            <IconPlus />
         </Card>
       </>
     );
 }
 
-export default TaskDialog
+export default TaskDialog;
