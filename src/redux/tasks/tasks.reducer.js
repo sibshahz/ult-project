@@ -1,8 +1,9 @@
 import { TasksActionTypes } from "./tasks.types";
+import { addTask } from "./tasks.utils";
 
 const INITIAL_STATE={
     currentTasks:[],
-    selectedTask:false,
+    selectedTask:true,
     editingTask:false
 };
 
@@ -13,11 +14,15 @@ const tasksReducer=(state=INITIAL_STATE,action)=>{
                 ...state,
                 currentTasks:action.payload
             }
+        case TasksActionTypes.SET_TASK_DATA:
+            addTask(action.payload);
+            return state;
         case TasksActionTypes.SET_TASK_EDITING:
         return{
             ...state,
             editingTask:action.payload
         }
+
         case TasksActionTypes.SET_SELECTED_TASK:
         return{
             ...state,

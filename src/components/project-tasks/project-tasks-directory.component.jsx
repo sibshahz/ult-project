@@ -3,7 +3,7 @@ import { connect } from 'react-redux/es/exports';
 import TaskItems from '../project-task-items/task-items.component';
 import {useNavigate} from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { selectSelectedProject,selectEditingProject } from '../../redux/projects/projects.selectors';
+import { selectSelectedProject,selectEditingProject, selectSelectedProjectId } from '../../redux/projects/projects.selectors';
 import { setProjectEditing, setSelectedProject } from '../../redux/projects/projects.actions';
 import { Accordion, Text,Badge,Title,Card } from '@mantine/core';
 import { IconPlus } from '@tabler/icons';
@@ -12,7 +12,6 @@ function ProjectTasksDirectory  ({selectedProject}) {
   const {projectTitle,overview,startDate,endDate,status,priority,id}=selectedProject;
   // const navigate = useNavigate();  
   useEffect(()=>{
-
   
   },[]);
 
@@ -68,7 +67,7 @@ function ProjectTasksDirectory  ({selectedProject}) {
 
 const mapStateToProps = createStructuredSelector({
   editingProject: selectEditingProject,
-  selectedProject: selectSelectedProject,
+  selectedProject: selectSelectedProject
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -9,7 +9,7 @@ import { Card, Image, Text, Badge, Button, Group,Spoiler,Menu,ActionIcon,Notific
 import { connect } from 'react-redux/es/exports';
 import { createStructuredSelector } from 'reselect';
 import { setProjectEditing, setSelectedProject } from '../../redux/projects/projects.actions';
-import { selectEditingProject, selectSelectedProject } from '../../redux/projects/projects.selectors';
+import { selectEditingProject, selectSelectedProject, selectSelectedProjectId } from '../../redux/projects/projects.selectors';
 import { encodeDateInString } from '../functions.utils';
 
 function Projectitem({endDate,priority,overview,projectAuthor,team,projectTitle,status,startDate,id,callingId,editingProject,selectedProject,setProjectEditing,setSelectedProject}) {
@@ -122,7 +122,7 @@ return(
 }
 
 const mapStateToProps = createStructuredSelector({
-  editingProject: selectEditingProject
+  editingProject: selectEditingProject,
 });
 
 const mapDispatchToProps = dispatch => ({

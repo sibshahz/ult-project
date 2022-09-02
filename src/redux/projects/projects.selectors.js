@@ -18,3 +18,8 @@ export const selectSelectedProject = createSelector(
   [selectProjects],
   selected => selected.selectedProject
 );
+
+export const selectSelectedProjectId=createSelector(
+  [selectSelectedProject],
+  project => project.id
+);
