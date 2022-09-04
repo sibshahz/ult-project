@@ -17,8 +17,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  projects: projectsReducer,
   tasks:tasksReducer,
+  projects: projectsReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

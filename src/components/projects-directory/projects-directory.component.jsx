@@ -36,7 +36,6 @@ const ProjectsDirectory=({currentProjects,setProjectsData})=> {
     var unsubscribeFromProjects=undefined;
       if (loading) return;
       if (user){
-        console.log("SUCCESS USER IS HERE",user.uid);
         try{
      
           var projectsRef = collection(db, "projects");

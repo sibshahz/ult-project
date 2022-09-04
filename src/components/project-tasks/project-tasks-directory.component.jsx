@@ -1,5 +1,14 @@
 import React,{useEffect} from 'react';
 import { connect } from 'react-redux/es/exports';
+import {
+  where,
+  query,
+  onSnapshot,
+  collection,
+  doc,
+  getDocs,
+  orderBy,
+} from "firebase/firestore";
 import TaskItems from '../project-task-items/task-items.component';
 import {useNavigate} from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -8,12 +17,46 @@ import { setProjectEditing, setSelectedProject } from '../../redux/projects/proj
 import { Accordion, Text,Badge,Title,Card } from '@mantine/core';
 import { IconPlus } from '@tabler/icons';
 import TaskDialog from '../task-dialog/task-dialog.component';
-function ProjectTasksDirectory  ({selectedProject}) {
+import { db} from "../../firebase/firebase";
+import { setTasksData } from '../../redux/tasks/tasks.actions';
+import { selectCurrentTasks } from '../../redux/tasks/tasks.selectors';
+
+function ProjectTasksDirectory  ({selectedProject,setTasksData,currentTasks}) {
   const {projectTitle,overview,startDate,endDate,status,priority,id}=selectedProject;
   // const navigate = useNavigate();  
-  useEffect(()=>{
-  
-  },[]);
+  useEffect(() => {
+    var unsubscribeFromProjects=undefined;
+      
+        try{
+          var tasksRef = collection(db, "tasks");
+          const projectRef = doc(db, "projects",id);
+
+      
+          // const q = query(tasksRef,where("projectRef","==",projectRef),orderBy("createdOn", "asc"));
+        
+          const q = query(tasksRef,where("projectRef","==",projectRef),orderBy("createdOn","asc"));
+            unsubscribeFromProjects =onSnapshot(q, (querySnapshot) => {
+              const tasks = [];
+              querySnapshot.forEach((doc) => {
+                console.log("ID OF TASK IS: ",doc.id) ; 
+                tasks.push(
+                    {
+                      taskTitle:doc.data().taskTitle,
+                      overview:doc.data().overview,
+                      startDate:doc.data().startDate,
+                      endDate:doc.data().endDate,
+                      priority:doc.data().priority,
+                      status:doc.data().status,
+                      id:doc.id
+                    });
+              });
+              setTasksData(tasks);
+
+            });
+       }catch(e){
+        console.error("Error is: ", e.message);
+       }
+    }, []);
 
   return (
     <>
@@ -67,11 +110,13 @@ function ProjectTasksDirectory  ({selectedProject}) {
 
 const mapStateToProps = createStructuredSelector({
   editingProject: selectEditingProject,
-  selectedProject: selectSelectedProject
+  selectedProject: selectSelectedProject,
+  currentTasks: selectCurrentTasks,
 });
 
 const mapDispatchToProps = dispatch => ({
   setProjectEditing: setting => dispatch(setProjectEditing(setting)),
+  setTasksData: tasks => dispatch(setTasksData(tasks)),
 });
 
 export default connect(
