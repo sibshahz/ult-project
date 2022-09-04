@@ -44,3 +44,7 @@ import {
         console.error("Error: ", e.message);
     }
   };
+
+  export const deleteTask=async (id)=>{
+    await deleteDoc(doc(db, "tasks",id));
+  }

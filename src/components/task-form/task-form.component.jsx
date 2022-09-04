@@ -1,23 +1,31 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {Box,Center,Group,Text,TextInput,Select,Button} from '@mantine/core';
 import { RichTextEditor } from '@mantine/rte';
 import { DatePicker} from '@mantine/dates';
-import { selectEditingTask } from '../../redux/tasks/tasks.selectors';
+import { selectEditingTask, selectSelectedTask } from '../../redux/tasks/tasks.selectors';
 import { selectSelectedProject } from '../../redux/projects/projects.selectors';
 import {setTaskData, setTaskEditing} from '../../redux/tasks/tasks.actions';
 import { showNotification } from '@mantine/notifications';
 import {IconCheck} from "@tabler/icons"; 
 import { encodeDateInString } from '../functions.utils';
 
-function TaskForm({setTaskOpened,selectedProject,setTaskData}) {
+function TaskForm({setTaskOpened,selectedProject,setTaskData,selectedTask,editingTask}) {
     const [taskTitle, setTaskTitle] = useState('');
     const [overview, setOverview] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
+    useEffect(() =>{
+      setTaskTitle();
+      setOverview();
+      setStartDate();
+      setEndDate();
+      setStatus();
+      setPriority();
+    },[editingTask]);
     const handleDateStart=(event)=>{
       // console.log("START DATE BEFORE FORMATING IS: ", event);
       // const date=encodeDateInString(event);
@@ -105,7 +113,7 @@ function TaskForm({setTaskOpened,selectedProject,setTaskData}) {
 
 const mapStateToProps = createStructuredSelector({
   editingTask: selectEditingTask,
-  selectedProject: selectSelectedProject
+  selectedTask: selectSelectedTask
 });
 
 const mapDispatchToProps = dispatch => ({

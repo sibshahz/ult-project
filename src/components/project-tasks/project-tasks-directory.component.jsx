@@ -38,7 +38,6 @@ function ProjectTasksDirectory  ({selectedProject,setTasksData,currentTasks}) {
             unsubscribeFromProjects =onSnapshot(q, (querySnapshot) => {
               const tasks = [];
               querySnapshot.forEach((doc) => {
-                console.log("ID OF TASK IS: ",doc.id) ; 
                 tasks.push(
                     {
                       taskTitle:doc.data().taskTitle,
@@ -51,7 +50,6 @@ function ProjectTasksDirectory  ({selectedProject,setTasksData,currentTasks}) {
                     });
               });
               setTasksData(tasks);
-
             });
        }catch(e){
         console.error("Error is: ", e.message);
@@ -100,7 +98,11 @@ function ProjectTasksDirectory  ({selectedProject,setTasksData,currentTasks}) {
         </Accordion.Item>
       </Accordion>
     <div>Tasks Directory:</div>
-    <TaskItems />
+    {
+        currentTasks.map(({id, ...otherProjectProps }) => (
+                        <TaskItems key={id} taskId={id} {...otherProjectProps} />
+                    ))
+                    }
     <TaskDialog />
     </>
   )
