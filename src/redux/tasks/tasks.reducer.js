@@ -3,7 +3,7 @@ import { addTask } from "./tasks.utils";
 
 const INITIAL_STATE={
     currentTasks:[],
-    selectedTask:true,
+    selectedTask:[],
     editingTask:false
 };
 

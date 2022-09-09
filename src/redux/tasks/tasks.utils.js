@@ -48,3 +48,19 @@ import {
   export const deleteTask=async (id)=>{
     await deleteDoc(doc(db, "tasks",id));
   }
+
+  export const editTask=async (taskId,taskDetails)=>{
+    const {editProjectTitle,editStartDate,editEndDate,editOverview,editPriority,editStatus}=taskDetails;
+    const id=taskId;
+    const examcollref = doc(db,'tasks', id)
+    await updateDoc(examcollref,{
+        taskTitle:editProjectTitle,
+        overview:editOverview,
+        startDate:editStartDate,
+        endDate:editEndDate,
+        priority:editPriority,
+        status:editStatus
+    } ).catch(error =>{
+      console.log(error.message)
+    }); 
+  }

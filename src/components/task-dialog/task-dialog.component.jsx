@@ -1,13 +1,23 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { Drawer, Button, Group,Card,useMantineTheme } from '@mantine/core';
 import {IconPlus} from "@tabler/icons";
 import TaskForm from '../task-form/task-form.component';
 import './task-dialog.styles.css';
+import { selectEditingTask } from '../../redux/tasks/tasks.selectors';
+import { setTaskEditing } from '../../redux/tasks/tasks.actions';
 
-const TaskDialog=() =>{
+const TaskDialog=({editingTask,setTaskEditing}) =>{
     const [taskOpened, setTaskOpened] = useState(false);
     const theme = useMantineTheme();
-
+    // useEffect(()=>{
+    //   if(editingTask){
+    //     setTaskOpened(true);
+    //   }else{
+    //     setTaskOpened(false);
+    //   }
+    // },[editingTask]);
     return (
       <>
         <Drawer
@@ -15,7 +25,7 @@ const TaskDialog=() =>{
           className='task-add-drawer'
           overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
           opened={taskOpened}
-          onClose={() => setTaskOpened(false)}
+          onClose={() => setTaskOpened(false) }
           title=""
           padding="xl"
           position="bottom"
@@ -36,4 +46,15 @@ const TaskDialog=() =>{
     );
 }
 
-export default TaskDialog;
+const mapStateToProps = createStructuredSelector({
+  editingTask:selectEditingTask,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setTaskEditing: editing => dispatch(setTaskEditing(editing))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TaskDialog);

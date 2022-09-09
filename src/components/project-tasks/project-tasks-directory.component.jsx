@@ -18,6 +18,7 @@ import { Accordion, Text,Badge,Title,Card } from '@mantine/core';
 import { IconPlus } from '@tabler/icons';
 import TaskDialog from '../task-dialog/task-dialog.component';
 import { db} from "../../firebase/firebase";
+import EditTaskDialog from '../edit-task-dialog/edit-task-dialog.component';
 import { setTasksData } from '../../redux/tasks/tasks.actions';
 import { selectCurrentTasks } from '../../redux/tasks/tasks.selectors';
 
@@ -104,6 +105,7 @@ function ProjectTasksDirectory  ({selectedProject,setTasksData,currentTasks}) {
                     ))
                     }
     <TaskDialog />
+    <EditTaskDialog />
     </>
   )
 }

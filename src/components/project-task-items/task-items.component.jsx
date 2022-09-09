@@ -9,9 +9,6 @@ import { deleteTask } from '../../redux/tasks/tasks.utils';
 import { selectEditingTask } from '../../redux/tasks/tasks.selectors';
 import { setSelectedTask, setTaskEditing } from '../../redux/tasks/tasks.actions';
 
-const handleEdit=()=>{
-  return;
-}
 
 function TaskItems({taskId,taskTitle,overview,startDate,endDate,priority,status,setSelectedTask,setTaskEditing}) {
   
@@ -28,6 +25,7 @@ function TaskItems({taskId,taskTitle,overview,startDate,endDate,priority,status,
     setSelectedTask({
       taskTitle,overview,startDate:startDate,endDate:endDate,status,priority,id:taskId
     });
+
   }
   const openDeleteModal = () =>
   openConfirmModal({
@@ -62,7 +60,7 @@ function TaskItems({taskId,taskTitle,overview,startDate,endDate,priority,status,
             </Menu.Target>
 
             <Menu.Dropdown>
-              <Menu.Item onClick={handleEdit} icon={<IconEdit size={14} />}>Quick Edit</Menu.Item>
+              <Menu.Item onClick={handleEdit} icon={<IconEdit size={14} />}>Edit</Menu.Item>
               <Menu.Item icon={<IconTrash size={14}  />} color="red" onClick={openDeleteModal}>
                 Delete
               </Menu.Item>
